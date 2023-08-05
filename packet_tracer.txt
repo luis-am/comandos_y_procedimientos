@@ -1,0 +1,1888 @@
+## configuracion esencial de un switch
+
+! <cr> significa carriage return
+! ver rango resumido de interfaces
+	input: do show interfaces | include line protocol
+
+! primero habilitamos el modo privilegiado
+	input: enable
+
+! luego pasamos a configuracion global
+	input: configure terminal
+
+! deshabilitamos la busqueda de ip-dominio
+	input: no ip domain-lookup
+
+! asignar un nombre al dispositivo
+	input: hostname [nombre]
+
+! asignar una contraseña secreta
+	input: enable secret [contraseña]
+
+! activar el servicio de encriptacion de contraseñas
+	input: services password-encryption
+
+! habilitar login de la linea de consola
+	input: line c 0
+	input: logging synchronous
+	input: password [contraseña]
+	input: login
+	input: exec-timeout [n° min]
+
+! habilitar login de la virtual terminal
+	input: line vty 0 15
+	input: password [contraseña]
+	input: login
+	input: exec-timeout [n° min]
+
+! habilitar login de la linea auxiliar
+	input: line aux 0
+	input: password [contraseña]
+	input: login
+	input: exec-timeout [n° min]
+
+! asinar un banner de bienvenida
+	input: banner motd "[el mensaje de bienvenida]"
+
+## para habilitar el acceso remoto del switch
+
+! especificar el nombre de dominio
+	input: ip domain-name [nombre.com]
+
+! habilitar el modulo de encriptacion
+	input: crypto key generate rsa
+	input: yes
+	output: le damos el valor de 1024 bits
+
+! habilitar nombre de usuario local y contraseña
+	input: username [username] privilege [numero de 0 a 15] secret [contraseña]
+
+! especificar el time-out de ip ssh
+	input: ip ssh time-out [n° seg]
+
+! especificar el numero de intentos de autenticacion ssh
+	input: ip ssh authentication-retries [numero de intentos]
+
+! habilitar el unico modo de acceso por ssh
+	input: line vty 0 4
+	input: transport input ssh
+	input: login local
+
+! configurar la interfaz virtual
+	input: interfaz vlan 1
+	input: ip address [ip] [mascara]
+	input: no shutdown
+
+! asignar el gateway
+	input: ip defaul-gateway [ip del gateway]
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+## configuracion esencial de un router
+
+! habilitar el modo privilegiado
+	input: enable
+
+! pasar al modo configuracion global
+	input: configure terminal
+
+! deshabilitar la busqueda de ip-domain
+	input: no ip domain-lookup
+
+! asignar un nombre al dispositivo
+	input: hostname [nombre]
+
+! asignar el minimo n° de caracteres a las contraseñas
+	input: security passwords min-lenght [n° caracteres]
+
+! habilitar el bloqueo de login por intentos
+	input: login block-for [n° seg] attempts [n°] within [n° seg]
+
+! asignar una contraseña secreta
+	input: enable secret [contraseña]
+
+! activar el servicio de encriptacion de contraseñas
+	input: services password-encryption
+
+! habilitar login de la linea de consola
+	input: line c 0
+	input: password [contraseña]
+	input: login
+	input: logging syncronous
+	input: exec-timeout [n° min]
+
+! habilitar login de la virtual terminal
+	input: line vty 0 4
+	input: password [contraseña]
+	input: login
+	input: exec-timeout [n° min]
+
+! habilitar login de la linea auxiliar
+	input: line aux 0
+	input: password [contraseña]
+	input: login
+	input: exec-timeout [n° min]
+
+! asinar un banner de bienvenida
+	input: banner motd "[el mensaje de bienvenida]"
+
+## para habilitar el acceso remoto del router
+
+! especificar el nombre de dominio
+	input: ip domain-name [nombre.com]
+
+! habilitar el modulo de encriptacion
+	input: crypto key generate rsa
+	input: yes
+	output: le damos el valor de 1024 bits
+
+! habilitar nombre de usuario local y contraseña
+	input: username [username] privilege [numero de 0 a 15] secret [contraseña]
+
+! especificar el time-out de ip ssh
+	input: ip ssh time-out [n° seg]
+
+! especificar el numero de intentos de autenticacion ssh
+	input: ip ssh authentication-retries [n°]
+
+! habilitar el unico modo de acceso por ssh
+	input: line vty 0 4
+	input: transport input ssh
+	input: login local
+
+## habilitar la comunicacion serial de router a router
+
+! elegir la interfaz serial (como ejemplo s0/0/0)
+	input: interfaz s0/0/0
+	input: ip address [ip] [mascara]
+	input: no shutdown
+	input: clock rate [numero de 0 4x10e6]
+
+# version 1 no soporta vlsm, no autenticacion y usa broadcast
+# version 2 no vlsm, usa autenticacion y usa multicast
+! habilitar el protocolo de enrutamiento (rip en este caso)
+	input: router rip
+	input: network [ip] 
+	input: version [1 o 2]
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+### mensajes de informacion con el comando show
+
+! mostrar la configuracion en ejecucion
+	input: show running-config
+
+! mostrar la configuracion de la NVRAM
+	input: show startup-config
+
+! mostrar la tabla de enrutamiento ipv4 (router)
+	input: show ip route
+
+! mostrar la table de enrutamiento ipv6
+	input: show ipv6 route
+
+! mostrar informacion detallada de las interfaces
+	input: show interfaces
+
+! mostrar el status de las interfaces (switch)
+	input: show interfaces status
+
+! mostrar el estado de las ip de las interfaces
+	input: show ip interface brief
+
+! mostrar el estado de las ipv6 de las interfaces
+	input: show ipv6 interface brief
+
+! mostrar la tabla MAC (switch)
+	input: show mac address-table
+
+! mostrar informacion de memoria flash
+	input: show flash:
+
+! mostrar el historial
+	input: show history
+
+! ver la informacion de los demas dispositivos de la red con el protocolo cdp (cisco discovery protocol)
+	input: show cdp neighbours
+	input: show cdp neighbours detail
+
+! mostrar las interfaces trunk
+	input: show interfaces trunk
+
+! mostrar las interfaces switchport
+	input: show interfaces switchport
+
+! mostrar informacion de las vlan
+	input: show vlan brief
+
+! mostrar informacion de conexion de servidor ssh
+	input: show ssh
+
+! mostrar informacion de ssh status
+	input: show ip ssh
+
+! modificar el bufer del historial
+	input: terminal history size 200
+
+! ingresar via telnet (command prompt)
+	input: telnet [ip]
+
+## estas vlan vienen por defecto, y no se pueden eliminar
+## 1002 fddi-default
+## 1003 token-ring-default
+## 1004 fddinet-default
+## 1005 trnet-default
+## rango de vlans
+	- 1 - 4094
+	- normal vlans -- 1 -1005
+	- extended vlans -- 1006 - 4094
+## IEE 802.1Q -- trunking protocol
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+## vlan red (modo 1)
+
+! escenario: 1 router, 1 switch, 6 pc, cada 2 pc perteneciente a un vlan
+
+# configurar el router
+! configurar interfaz g0/0 a la vlan10
+	input: int g0/0
+	input: description link to vlan10
+	input: ip address [ip] [mascara]
+	input: no shutdown
+
+! configurar interfaz g0/1 a la vlan20
+	input: int g0/1
+	input: description link to vlan20
+	input: ip address [ip] [mascara]
+	input: no shutdown
+
+! configurar interfaz g0/2 a la vlan30
+	input: int g0/2
+	input: description link to vlan30
+	input: ip address [ip] [mascara]
+	input: no shutdown
+
+# configurar el switch
+# asinar nombres a la vlan's
+	input: vlan 10
+	input: name [nombre1]
+	input: vlan 20
+	input: name [nombre2]
+	input: vlan 30
+	input: name [nombre3]
+
+# asignar los puertos del switch pertenecientes a la vlan10, f0/7 esta conectado a g0/0 de r1
+	input: interface range f0/1-2, f0/7
+	input: switchport mode access
+	input: switchport access vlan10
+
+! asignar los puertos del switch pertenecientes a la vlan20, f0/8 esta conectado a g0/1 de r1
+	input: interface range f0/3-4, f0/8
+	input: switchport mode access
+	input: switchport access vlan20
+
+! asignar los puertos del switch pertenecientes a la vlan30, f0/9 esta conectado a g0/2 de r1
+	input: interface range f0/5-6, f0/9
+	input: switchport mode access
+	input: switchport access vlan30
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+## Router on a Stick (ROAS) -- ejemplo practico
+	- enruta varias vlans usando una sola interfaz entre router y switch.
+
+! deshabilitar todos los puertos del los switches (por seguridad)
+	input: interface range f0/1-24
+	input: shutdown
+## configurando los switchport mode de switches
+! asignar los switchport mode access vlan 10 en el switch 1
+	input: interface range f0/1-2
+	input: no shutdown
+	input: switchport mode access
+	input: switchport access vlan 10
+
+! asignar los switchport mode access vlan 30 en el switch 1
+	input: interface range f0/3-4
+	input: no shutdown
+	input: switchport mode access
+	input: switchport access vlan 30
+
+! asignar los switchport mode access vlan 10 en el switch 2
+	input: interface range f0/1-2
+	input: no shutdown
+	input: switchport mode access
+	input: switchport access vlan 10
+
+! asignar los switchport mode access vlan 20 en el switch 2
+	input: interface range f0/3
+	input: no shutdown
+	input: switchport mode access
+	input: switchport access vlan 20
+
+## configurando los switchport trunk port y native port de switches
+! asignar trunk mode en el puerto del switch 1
+	input: interface g0/1
+	input: no shutdown
+	input: switchport mode trunk
+	input: switchport trunk allowed vlan 10,30
+
+! asignar native vlan en el puerto del switch 1
+	input: switchport trunk native vlan 1000
+
+! asignar trunk mode en el puerto g0/1 del switch 2
+	input: interface g0/1
+	input: no shutdown
+	input: switchport mode trunk
+	input: switchport trunk allowed vlan 10,30
+
+! asignar native vlan en el puerto g0/1 del switch 2
+	input: switchport trunk native vlan 1000
+
+! asignar trunk mode en el puerto g0/2 del switch 2 (este es el que va conectado al router)
+	input: interface g0/2
+	input: no shutdown
+	input: switchport mode trunk
+	input: switchport trunk allowed vlan 10,20,30
+
+! asignar native vlan en el puerto g0/2 del switch 2
+	input: switchport trunk native vlan 1000
+
+## configurando el router (ROAS)
+! configurar el puerto que va a transportar las multiples vlan hacia el switch (ejemplo g0/0)
+	input: interface g0/0
+	input: no shutdown
+
+! configurando la subinterface del puerto g0/0
+	input: interface g0/0.10
+	input: encapsulation dot1q 10
+	input: ip address [ip] [mascara]
+
+! configurando la subinterface del puerto g0/0
+	input: interface g0/0.20
+	input: encapsulation dot1q 20
+	input: ip address [ip] [mascara]
+
+! configurando la subinterface del puerto g0/0
+	input: interface g0/0.30
+	input: encapsulation dot1q 30
+	input: ip address [ip] [mascara]
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+## el modo troncal de del switch tiene varios modos (ejemplo vlan10, vlan20, vlan30)
+! vlans permitidos
+	input: switchport trunk allowed vlan 10,20,30
+
+! agregar vlans a la lista
+	input: switchport trunk allowed vlan add 40,50
+
+! todas las vlans
+	input: switchport trunk allowed vlan all
+
+! todas las vlans con excepciones
+	input: switchport trunk allowed vlan except 40,50
+
+! ninguna vlan
+	input: switchport trunk allowed vlan none
+
+! eliminar vlan de la lista
+	input: switchport trunk allowed vlan remove
+
+! poner como default las interfaces
+	input: default interface g0/0
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+## inter-vlan routing (multilayer switch)
+
+## svi (switch virtual interfaces) -- trabaja como gateway en el switch de capa 3 (s2 = multicapa)
+
+! eliminar las configuraciones de sub-interfaces ya sea router o switch
+	input: no interface g0/0.10
+	input: no interface g0/0.20
+	input: no interface g0/0.30
+
+! dejar la configuracion por defecto en la interfaz del router
+	input: default interface g0/0
+
+! asignar la direccion ip del puerto g0/0 del router
+	input: interface g0/0
+	input: ip address [ip] [mascara]
+
+! dejar la configuracion por defecto en la interfaz del s2
+	input: default interface g0/0
+
+! habilitar el routing en el switch multicapa (s2)
+	input: ip routing
+
+! asignar el puerto de ruteo en el switch multicapa (s2)
+	input: interface g0/0
+	input: no switchport
+
+! asignar la direccion ip al puerto de ruteo de s2
+	input: ip address [ip] [mascara]
+
+! asignar la ruta estatica del puerto enrutado de s2 hacia el puerto del router
+	input: ip route 0.0.0.0 0.0.0.0 [ip] [mascara] -- direccion ip del gateway
+
+## configurando la svi del switch multicapa (s2)
+
+! asignar las direcciones ip de las svi de s2
+	input: interface vlan10
+	input: ip address [ip] [mascara]
+	input: no shutdown
+	input: interface vlan10
+	input: ip address [ip] [mascara]
+	input: no shutdown
+	input: interface vlan10
+	input: ip address [ip] [mascara]
+	input: no shutdown
+
+## inter-vlan routing
+
+! 1. configurar el puerto del router que conecta al switch multicapa
+! 2. nombrar y direccionar las vlans
+! 3. configurar los puertos del switch multicapa que conectan a los hosts modo access
+! 4. configurar los puertos del switch multicapa que conectan a otros switches modo trunk
+! 5. configurar el puerto del switch multicapa que conecta al router, el puerto enrutable
+! 6 habilitar el ip routing en el switch multicapa
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+### configurar los puertos en una interfaz de switch
+
+! input: duplex auto
+! input: duplex full
+! input: duplex half
+
+! input: speed auto
+! input: speed 10
+! input: speed 100
+! input: speed 1000
+
+! input: mdix auto
+
+### configurar interfaz de loopback (bucle invertido) en el router
+
+! input: interface loopback 0
+! input: ip address [ip] [mascara]
+! input: no shutdown
+
+### osfp routing ###
+
+## este es un ejemplo de la clase de diseño de redes con tres routers
+
+! iniciar un proceso ospf v3 en R1
+	ipv6 router ospf 1
+
+! agregar id a router R1
+	router-id 1.1.1.1
+
+! agregar interfaz que estara dentro del routing ospf
+	input: interface g0/0
+	input: ipv6 ospf 1 area0
+	input: interface s1/0
+	input: ipv6 ospf 1 area0
+	input: interface s1/1
+	input: ipv6 ospf 1 area0
+
+! verificar las id de router de todos los router
+	input: show ipv6 ospf
+
+! iniciar un proceso ospf v3 en R2
+	ipv6 router ospf 1
+
+! agregar id a router R2
+	router-id 2.2.2.2
+
+! agregar interfaz que estara dentro del routing ospf
+	input: interface g0/0
+	input: ipv6 ospf 1 area0
+	input: interface s1/0
+	input: ipv6 ospf 1 area0
+	input: interface s1/1
+	input: ipv6 ospf 1 area0
+
+! verificar las id de router de todos los router
+	input: show ipv6 ospf
+
+! iniciar un proceso ospf v3 en R3
+	ipv6 router ospf 1
+
+! agregar id a router R3
+	router-id 3.3.3.3
+
+! agregar interfaz que estara dentro del routing ospf
+	input: interface g0/0
+	input: ipv6 ospf 1 area0
+	input: interface s1/0
+	input: ipv6 ospf 1 area0
+	input: interface s1/1
+	input: ipv6 ospf 1 area0
+
+! verificar la id de router de todos los router
+	input: show ipv6 ospf
+
+! verificar la configuracion de protocolos
+	input: show ipv6 protocols
+
+! verificar interfaces ospf interface
+	input: show ipv6 ospf interface
+
+! mostrar resumen de interfaces con ospf habilitado
+	input: show ipv6 interface brief
+
+! mostrar el protocolo ospf en una interfaz
+	input: show ipv6 ospf interface g0/0
+
+! cambiar una interfaz a modo pasivo
+	input: ipv6 router ospf 1
+	input: passive-interface g0/0
+
+! ver la tabla de enrutamiento ipv6
+	input: show ipv6 route
+
+! ver la tabla de enrutamiento ipv6 solo ospf
+	input: show ipv6 route ospf
+
+! verificar vecinos ospf v3 
+	show ipv osfp neighbour
+
+! establecer de manera predeterminada las interfaces como pasivas
+	input: ipv6 router ospf 1
+	input: passive-interface default
+
+! deshabilitar de manera predeterminada las interfaces como pasivas
+	input: ipv6 router ospf 1
+	input: no passive-interface default
+
+## OSPFv3 utiliza direccion de 32 bits para la id del router
+
+## los paquetes de saludo de ospf se dan cada 10 segundos y es para saber si los vecinos estan activos
+
+## RIPv2 es un protocolo de routing sin clase
+
+! ver el protocolo de enrutamiento
+	input: show ip protocol
+
+! muestra el estado del puerto
+	input: show interface [puerto] switchport 
+
+! asignar una vlan de voz a un puerto ejemplo el puerto 1 a una vlan 10
+	input: interface [f0/1]
+	input: mls qos trust cos
+	input: switchport voice vlan [10]
+
+! formas de verificar el estado de las vlan
+	input: show vlan brief
+	input: show vlan id [vlan id]
+	input: show vlan name [vlan nombre]
+	input: show vlan summary
+	input: show interface [puerto] switchport
+
+! cambiar la pertenencia de una vlan en un puerto
+	input: interface [puerto]
+	input: no switchport access vlan
+
+! eliminar una vlan
+	input: no vlan [id]
+
+! eliminar por completo las vlan
+	input: delete flash:vlan.dat
+
+! crear un enlace troncal
+	input: interface [puerto]
+	input: switchport mode trunk
+	input: switchport trunk native vlan  [id]
+	input: switchport trunk vlan allowed [id's]
+
+! reestablecer al modo predeterminado de un enlace troncal
+	input: interface [puerto]
+	input: no switchport trunk native vlan
+	input: no switchport trunk allowed
+
+! habilitar enlaces troncales a un puerto que no admite dtp
+	input: switchport mode trunk
+	input: switchport nonegotiate
+
+! habilitar el modo dinamico de un enlace troncal
+	input: switchport mode dynamic auto
+
+! modos de interfaz negociados
+	input: switchport mode access
+	input: nonegotiate
+
+! verificacion del modo dtp
+	input: show dtp interface [puerto]
+
+##### habilitar enrutamiento RIP IPv6 #####
+
+! habilitar enrutamiento ipv6
+	input: ipv6 unicast-routing
+
+! habilitar conmutacion avanzada de ipv6
+	input: ipv6 cef
+
+! dar un nombre al enrutamiento rip
+	input: ipv6 router rip [nombre de proceso]
+
+! habilitar el ripng en cada uno de las interfaces (ejemplo con la interfaz g0/0)
+	input: interface g0/0
+	input: ipv add [direccion ip]
+	input: ipv6 rip [nombre de proceso] enable
+
+! ver las rutas de ripv6
+	input: show ipv6 route
+	input: show ipv6 rip database
+
+##### ejemplo de rip v2 #####
+
+! configurar ripv2 en los 3 routers
+	input: router rip
+	input: version 2
+	input: network [ip]
+	input: passive-interface [puerto]
+
+! no sumarizar rutas, para saber rutas no contiguas
+	input: router rip
+	input: no auto-summary
+
+! borrar la tabla de routing
+	input: clear ip route *
+
+! crear una ruta estatica hacia la subred con la que queremos compartir con los demás routers (simula internet)
+	input: ip route 0.0.0.0 0.0.0.0 [ip de la subred o la direccion del host] 
+
+! compartir la ruta con todos los routers
+	input: router rip
+	input: default-information originate
+
+### EIGRP ###
+! configurar router eigrp
+	input: router eigrp [AS] (autonomous system)
+
+! deshabilitar automarizacion
+	input: no auto-summary
+
+! poner una interfaz como pasiva
+	input: passive-interface [puerto]
+
+! las redes que se va anunciar en las interfaces
+	input: network [x.x.x.x]
+	input: network [wildcard]
+
+### RIPng se indica por nombre de proceso (importante)
+
+! comando para hacer participe a la interfaz con el nombre de proceso
+	input: int [puerto]
+	input: ipv6 rip [nombre de proceso] enable
+
+! crear una ruta estatica ipv6
+	input: ipv6 route ::0/64 [direccion que se usara como via predeterminada]
+
+! incluir las rutas estaticas en las actualizaciones
+	input: interface [puerto]
+	input: ipv6 rip [proceso] default-information originate
+
+### rutas estaticas ###
+	
+! ruta estatica recursiva o de siguiente salto
+	input: ip route [ip remota] [interfaz del siguiente salto del siguiente router]
+
+! ruta estatica conectada directamente
+	input: ip route [ip remota] [interfaz del mismo router de donde va a salir el paquete]
+
+! ruta estatica predeterminada
+	input: ip route 0.0.0.0 0.0.0.0 [interfaz del mismo router de donde va a salir]
+
+### dhcpv4 ###
+
+! primero tienen que conocerse todas las redes con rip por ejemplo
+
+! comandos basicos en rip
+	input: router rip
+	input: version 2
+	input: no auto-summary
+	input: passive-interface [puerto en donde no se va a anunciar el protocolo rip]
+	input: network [x.x.x.x (red que se va anunciar a los demás routers)]
+
+! configurar dhcp
+	input: ip dhcp excluded-address [ip's que se van a excluir del pool]
+	input: ip dhcp pool [nombre del pool]
+	input: network [ip de la red]
+	input: default-router [ip del gateway]
+	input: dns-server [ip del servidor dns]
+
+! deshabilitar dhcp
+	input: no service dhcp
+
+! ver dhcp pool
+	input: show ip dhcp pool
+
+! ver direcciones dhcp asignadas (ver las direcciones asociadas con las mac)
+	input: show ip dhcp binding
+
+! ver direcciones en donde hay conflicto
+	input: show ip dhcp conflict
+
+! ver estado del servidor dhcp
+	input: show ip dhcp server statictis
+
+! retransmision de DHCPv4
+	input: interface [puerto]	
+	input: ip helper address [ip del servidor (no router)]
+
+! para que el router reciba peticiones en caso de errores
+	input: ip dhcp relay information trust-all
+
+### dhcpv6 ###
+
+! roles del router
+	- servidor dhcpv6
+	- cliente dhcpv6
+	- agente de retransmisión
+
+! RA: router announcement
+! RS: router solicitation 
+
+! flags en RA (A, O, M)
+
+! ipv6 SLAAC (a=1, o=0, m=0)
+
+! Habilitar DHCPv6 stateless en interfaz de router (flag O = 1) → a=1, o=1, m=0
+	input: interface [puerto]
+	input: ipv6 nd other-config-flag
+
+! deshabilitar DHCPv6 stateless en interfaz de router
+	input: interface [puerto]
+	input: no ipv6 nd other-config-flag
+
+! habilitar DHCv6 stateful en interfaz de router (flag m = 1)
+	input: interface [puerto]
+	input: ipv6 nd managed-config-flag
+	input: ipv6 nd prefix default no-autoconfig
+
+## configurar servidor dhcpv6 stateless en router
+
+! habilitar enrutamiento ipv6
+	input: ipv6 unicast-routing
+
+! definir nombre de grupo dhcpv6
+	input: ipv6 dhcp pool [nombre]
+
+! configurar el grupo dhcpv6
+	input: dns-server [ipv6]
+	input: domain-name [nombre de dominio] 
+
+! enlazar el grupo a una interfaz
+	input: ipv6 nd other-config-flag
+	input: ipv6 dhcp server [nombre del grupo]
+
+## configurar cliente dhcpv6 stateless en router
+
+! habilitar enrutamiento ipv6 en router cliente
+	input: ipv6 unicast-routing
+	
+! crear una link local en la interfaz del router cliente sin gua
+	input: interface [puerto]
+	input: ipv6 enable
+
+! configurar router cliente para usar slaac
+	input: interface [puerto]
+	input: ipv6 address autoconfig
+
+! verificar router cliente tenga asignado gua
+	input: show ipv6 interface brief
+
+! verificar que se haya recibido información adicional en el router cliente
+	input: show ipv6 dhcp interface [puerto]
+
+## configurar servidor dhcpv6 stateful en router
+	
+! habilitar enrutamiento ipv6 en router cliente
+	input: ipv6 unicast-routing
+
+! definir nombre de grupo dhcpv6
+	input: ipv6 dhcp pool [nombre]
+
+! configurar el grupo dhcpv6
+	input: address prefix [prefijo de red ipv6]
+	input: dns-server [direccion ipv6]
+	input: doman-name [nombre de dominio]
+
+! enlazar el grupo a una interfaz
+	input: interface [puerto]
+	input: ipv6 nd managed-config-flag
+	input: ipv6 nd prefix default no-autoconfig
+	input: ipv6 dhcp server [nombre de grupo]
+
+## configurar cliente dhcpv6 stateful en router
+
+! habilitar enrutamiento ipv6 en router cliente
+	input: ipv6 unicast-routing
+
+! crear una link local en la interfaz del router cliente sin gua
+	input: interface [puerto]
+	input: ipv6 enable
+
+! configurar router cliente para que use dhcpv6
+	input: interface [puerto]
+	input: ipv6 address dhcp
+
+! verificar que el router cliente tenga gua
+	input: show ipv6 interface brief
+
+! verificar que router reciba información necesaria dhcpv6
+	input: show ipv6 dhcp interface [puerto]
+
+! verificar nombre de pool dhcpv6
+	input: show ipv6 dhcp pool
+
+! verificar base de datos dhcpv6
+	input: show ipv6 dhcp binding
+
+## configurar router como agente de retransmisión
+
+! en la interfaz en donde se va a recibir la peticion del cliente 
+	input: ipv6 dhcp relay destination [direccion del servidor dhcpv6] [interfaz de salida para llegar al servidor]
+
+! verificar el agente de retransmisión
+	input: show ipv6 dhcp interface
+
+
+##### spanning tree #####
+
+! mostrar el spanning tree
+	input: show spanning-tree
+
+! configurar costo de puerto
+	input: interface [puerto]
+	input: spanning-tree cost [valor]
+
+! restablecer costo de puerto
+	input: interface [puerto]
+	input: no spanning-tree cost
+
+! configurar un switch como root bridge
+	input: spanning-tree vlan [n°] root primary
+
+! configurar un switch como root secundario
+	input: spanning-tree vlan [n°] root secondary
+
+! configurar el valor de prioridad en incrementos de 4096
+	input: spanning-tree vlan [n°] priority [n°]
+
+! configurar portfast y bpdu guard
+	input: interface [puerto]
+	input: spanning-tree portfast
+	input: spanning-tree bpduguard enable
+
+!  configurar el tipo de enlace en un puerto rapid pvst+
+	input: switchport mode trunk
+	input: spanning-tree link-type [point-to-point | shared]
+
+! cambiar a rapid pvst+
+	input: spanning-tree mode rapid-pvst
+
+! borrar los stp detectados
+	input: clear spanning-tree detected-protocols
+
+##### FHRP ##### (protocolo de redundancia de primer salto)
+
+## HSRP (hop standby router protocol)
+## HSRP para IPv6 (hop standby router protocol)
+## VRRPv2 (virtual router redundancy protocol version 2)
+## VRRPv3 (virtual router redundancy protocol version 3)
+## GLBP (protocolo de equilibrio de carga del gateway)
+## GLBP para IPVv6 (protocolo de equilibrio de carga del gateway)
+## IRDP (protocolo de deteccion de router icmp)
+
+## estados
+	inicial → aprendizaje → escucha → hablar → en espera
+
+## VRRP (master & backup)
+	ipv4: multicast 224.0.0.18
+
+## HSRP (active & standby)
+
+! ipv4 multicast	
+	v1: 224.0.0.2
+	v2: 224.0.0.102
+
+! virtual mac address
+	v1: ultimos dos digitos
+	v2: ultimos 3 digitos
+
+! configurar interfaz del router activo
+	input: interface [puerto]
+
+! establecer la version de standby del puerto
+	input: standby version 1
+
+! establecer el numero de grupo para identificar la interfaz virtual
+	input: standby 1 ip [x.x.x.x]
+
+! definir router activo estableciendo prioridad (0 - 255)
+	input: standby 1 priority [x]
+	-100 es predeterminado
+
+! configurar para que el router activo tome el control
+	input: standby 1 preempt
+
+! comprobar HSRP
+	input: show standby
+
+! mostrar resumen HSRP
+	input: show standby brief
+
+! debug hsrp, ver los paquetes de saludo
+	input: debug standby packets
+
+! debug hsrp, ver los eventos de hsrp
+	input: debug standby terse
+
+## GLBP
+
+! configurar en el router activo
+! configurar la interfaz
+	input: interface [puerto]
+
+! establecer el grupo y la ip virtual
+	input: glbp 1 ip [ip virtual]
+
+! establecer intento activo
+	input: glbp 1 preempt
+
+! establecer la prioridad
+	input: glbp 1 priority [numero]
+
+! modo de glbp
+	input: glbp 1 load-balancing round-robin
+
+! configurar en el otro router secundario
+	input: interface [puerto]
+	input: glbp 1 ip [puerto]
+	input: glbp 1 load-balancing round-robin
+
+##### etherchannel ##### IEEE (802.3ad)
+
+# PagP modos → desirable, auto, on
+# LacP modos → passive, active, on
+
+! especificar el rango de puertos a formar el grupo
+	input: interface range g0/[rango]
+
+! apagar los puertos
+	input: shutdown
+
+! crear la interfaz port channel
+	input: channel-group [1-6] mode [modo]
+
+! encender los  puertos
+	input: no shutdown
+
+! poner en modo trunk la interfaz port channel(modo configuracion)
+	input: interface port-channel [numero]
+	input: switchport mode trunk
+
+! mostrar estado general de canal de puertos
+	input: show interfaces port-channel [numero]
+
+! mostrar informacion unica por canal de puertos
+	input: show etherchannel summary
+
+! mostrar informacion de canal de puertos especifico
+	input: show etherchannel port-channel
+
+! mostrar informacion sobre informacion de la interfaz en el port channel
+	input: show interfaces [puerto] etherchannel
+
+##### CISCO DISCOVERY PROTOCOL (CDP) #####
+
+! habilitar de manera global el descubrimiento cdp
+	input: cdp run
+
+! deshabilitar de manera global el descubrimiento cdp
+	input: no cdp run
+
+! habilitar a una interfaz
+	input: cdp enable
+
+! deshabilitar a una interfaz
+	input: no cdp enable
+
+! verificar la informacion de cdp
+	input: show cdp neighbours
+
+! verificar la informacion de cdp mas detallado
+	input: show cdp neighbours detail
+
+! verificar la informacion de un puerto en especifico
+	input: show cdp interface [puerto]
+
+##### LINK LAYER DISCOVERY PROTOCOL (LLDP) #####
+
+! habilitar de manera global lldp
+	input: lldp run
+
+! deshabilitar de manera global lldp
+	input: no lldp run
+
+! habilitar a una interfaz la transmision
+	input: lldp transmit
+
+! habilitar a una interfaz la recepcion
+	input: lldp receive
+
+! deshabilitar a una interfaz la transmision
+	input: no lldp transmit
+
+! deshabilitar a una interfaz la recepcion
+	input: no lldp receive
+
+! verificar la informacion del protocolo LLDP
+	input: show lldp
+
+! verificar la informacion del protocolo LLDP mas detallada
+	input: show lldp neighbour details
+
+##### IMPLEMENTACION DE SEGURIDAD DE PUERTOS #####
+
+! apagar los puertos que no se utilizan (asegurar puertos sin utilizar)
+	input: interface range [rango de puertos]
+	input: shutdown
+
+! habilitar el port-security (antes de eso configurar el tipo de modo acceso o troncal)
+	input: switchport port-security
+
+! limitar y aprender mac addresses (default es 1)
+	input: switchport port-security maximum [x]
+
+! configurar manualmente una mac
+	input: switchport port-security mac-address [mac-address]
+
+! configurar automaticamente sticky
+	input: switchport port-security mac-address sticky
+
+! verificar la seguridad del puerto
+	input: show port-security
+
+! verificar las direcciones mac-address aprendidas
+	input: show port-security address
+
+! establecer el tiempo de envejecimiento de una direccion mac
+	input: switchport port-security aging time [x]
+	x: static: habilitar vencimiento para direcciones configuradas en este puerto
+	tipo: absoluto o inactividad
+
+! poner a modo de violacion el puerto modo shutdown (envia mensaje syslog)
+	input: switchport port-security violation shutdown
+
+! poner a modo de violacion el puerto modo restrict (bota mac desconocidas envia mensaje syslog)
+	input: switchport port-security violation restrict
+
+! poner a modo de violacion el puerto modo protect (no envia mensaje syslog)
+	input: switchport port-security violation protect
+
+! volver habilitar el puerto error-disabled
+	input: shutdown
+	input: no shutdown
+
+! habilitar inspeccion dhcp
+	input: ip dhcp snooping
+
+! habilitar el puerto de confianza dhcp (cuando esta conectado a un servidor dhcp por ejemplo)
+	input: ip dhcp snooping trust
+
+! habilitar el puerto no confiable arp (cuando esta conectado a un host que no sea servidor, router o switch)
+	input: ip dhcp snooping limit rate [cantidad de paquetes]
+ 
+ ! habilitar la inspeccion en las vlans
+ 	input: ip dhcp snooping vlan [numero]
+
+ ! verificar la inspeccion dhcp
+ 	input: show ip dhcp snooping
+
+ ! verificar los clientes que han recibido dhcp
+ 	input: show ip dhcp snooping binding
+
+ ! habilitar el puerto de confianza arp (cuando esta conectado a un servidor dhcp por ejemplo)
+	input: ip arp inspection trust
+
+! habilitar el puerto no confiable arp (cuando esta conectado a un host que no sea servidor, router o switch)
+	input: ip arp inspection vlan [x]
+
+! configurar dai
+	input: ip arp inspection validate
+
+! configurar el portfast en un puerto conectado a un host final (permite conectar rapidamente a un host sin pasar por los estados de aprendizaje y escucha; primero se habilita el puerto en modo access)
+	input: interface [puerto]
+	input: switchport mode access
+	input: spanning-tree portfast
+
+! desabilitar portfast en un puerto
+	input: interface [puerto]
+	input: spanning-tree portfast disable
+
+! habilitar portfast a todos los puertos de manera global
+	input: spanning-tree portfast default
+
+! verificar si portfast esta habilitado globalmente
+	input: show run | begin span
+
+! verificar portfast de manera global
+	input: show spanning-tree summary
+
+! verificar portfast en una interfaz
+	input: show spanning-tree interface [x] detail
+
+! habilitar proteccion bpdu en una interfaz
+	input: spanning-tree bpduguard enable
+
+! habilitar proteccion bpdu de manera global
+	input: spanning-tree portfast bpduguard default
+
+##### OSPF #####
+
+### 3 formas de modificar el costo OSPF
+! cambiar el ancho de banda de referencia
+	input: auto-cost reference-bandwidth [megabits por second]
+
+! cambiar el ancho de banda en una interfaz
+	input: bandwidth [numero]
+
+! cambiar el costo de la interfaz
+	input: ip ospf cost [numero]
+
+! verificar el costo de las interfaces
+	input: ip ospf interface brief
+
+### default hello timer is 10 seconds en una conexion ethernet, dead timer is 40 seconds
+### default reference bandwidth = 100mbps
+### hello messages are multicast 224.0.0.5
+
+! activar directamente ospf en una interfaz
+	input: int [puerto]
+	input: ip ospf [x] area [x]
+
+! configurar todas las interfaces ospf como pasivas
+	input: passive-interface default
+
+! configurar una interfaz especifica como pasiva
+	input: passive-interface [puerto]
+
+### CDP & LLDP ###
+
+! mostrar la configuracion cdp
+	input: show cdp
+
+! mostrar el trafico recibido y enviado cdp
+	input: show cdp traffic
+
+! mostrar los vecinos cdp
+	input: show cdp neighbors
+
+! mostrar todos los vecinos cdp con mas detalles
+	input: show cdp entry *
+
+! mostrar todos los vecinos cdp con mas detalles
+	input: show cdp neighbours detail
+
+! mostrar el trafico cdp en una interface
+	input: show cdp interface
+
+! habilitar / deshabilitar cdp
+	input: [no] cdp run
+
+! habilitar / deshabilitar cdp en una interfaz
+	input: interface [puerto]
+	input: [no] cdp enable
+
+! cambiar el timer cdp
+	input: cdp timer [seconds]
+
+! cambiar el holdtime cdp
+	input: cdp holdtime [seconds]
+
+### LLDP (link layer discovery protocol) ###
+
+! habilitar lldp globalmente
+	input: lldp run
+
+! habilitar transmision lldp en interface en especifico
+	input: lldp transmit
+
+! habilitar recepcion lldp en interface en especifico
+	input: lldp receive
+
+! configurar timer lldp
+	input: lldp timer [seconds]
+
+! configurar holdtime lldp
+	input: lldp holdtime [seconds]
+
+! configurar lldp reinit timere
+	input: lldp reinit [seconds]
+
+! ver configuracion lldp
+	input: show lldp
+
+! ver status lldp trafico
+	input: show lldp traffic
+
+! ver lldp interface
+	input: show lldp interface
+
+! ver vecinos lldp
+	input: show lldp neighbours
+
+! ver vecinos con mas detalles
+	input: show lldp neighbours detail
+
+### NTP (network time protocol) ###
+
+! ver el reloj
+	input: show clock
+
+! ver informacion detallada del reloj
+	input: show clock detail
+
+! configurar reloj en software
+	input: clock set [hh:mm:ss] [month] [day] [year]
+
+! configurar el reloj hardware
+	input: calendar set [hh:mm:ss] [month] [day] [year]
+
+! sincronizar clock con calendar, esto es cuando el clock esta mal configurado
+	input: clock read-calendar
+
+! sincronizar clock con calendar, esto es cuando el calendar esta mal configurado
+	input: clock update-calendar
+
+! configurar timezone
+	input: clock timezone [word] [numero]
+
+! configurar los servidores a sincronizar
+	input: ntp server [ip del servidor]
+
+! ver asociaciones de ntp con los servidores
+	input: show ntp associations
+
+! ver el status de ntp
+	input: show ntp status
+	
+! configurar ntp server
+	input: npt master
+
+! configurar active mode
+	input: ntp peer [ip vecino]
+
+! configurar un cliente ntp para la autenticacion
+	input: ntp authenticate
+	input: ntp authentication-key [key-number] md5 [key]
+	input: ntp trusted-key [key-number]
+	input: ntp server [ip address] key [key-number]
+
+### DNS ###
+
+! configurar un router como servidor dns
+	input: ip dns server
+
+! configurando lista de hostnames con sus ip's
+	input: ip host [nombre] [ip]
+	input: ip host [nombre] [ip]
+	input: ip host [nombre] [ip]
+
+! configurando el servidor a preguntar en caso de que tenga en su registro
+	input: ip name-server [ip del servidor (google por ejemplo)]
+
+! configurar el router para realizar consultas
+	input: ip domain lookup
+
+! ver los hosts creados en el router
+	input: show hosts
+
+### DHCP ###
+
+! configurando dhcp server en el router
+	input: ip dhcp excluded-address [ip inicio] [ip final]	# excluye direcciones ip
+	input: ip dhcp pool [name]	# nombre del pool
+	input: network [ip network]/* # direccion de la red
+	input: default-router [ip gateway] # direccion del default gateway
+	input: dns-server [ip dns] # direccion dns
+	input: domain-name [nombre de dominio] # nombre de dominio
+	input: lease [dia] [hora] [minuto] # configurar el tiempo de lease
+
+! mostrar las direcciones arrendadas
+	input: show ip dhcp binding
+
+! configurar dhcp relay agent en la interfaz del router
+	input: interface [puerto] # el puerto por el que se va recibir las peticiones dhcp
+	input: ip helper-address [ip servidor] # comando con la ip del servidor dhcp que esta en otro segmento de red
+
+! configurar cliente dhcp
+	input: interface [puerto] # el puerto en donde va a recibir la direccion ip del servidor
+	input: ip address dhcp # confirando la interfaz como cliente dhcp
+
+### syslog ###
+
+! configurar logging to the console line
+	input: logging console [numero] # level o keyword
+
+! configurar loggin to the vty lines
+	input: logging monitor [numero] # level o keyword
+
+! configurar logging to the buffer
+	input: logging buffered [numero en bytes] [level] # buffer almacenado
+
+! configurar logging to the external server (2 formas)
+	input: logging [ip del servidor] # logging al servidor
+	input: logging host [ip del servidor] # logging al servidor
+
+! configurar logging level en el servidor
+	input: logging trap debugging
+
+! comando para visualizar los logs cuando se conecta via ssh o telnet
+	input: terminal monitor
+
+! no interrupir cuando se tipea algun comando
+	input: logging syncronous
+
+! configurar el timestamp y sequence-number
+	input: service timestamps log [datetime | uptime] # datetime muestra la hora | uptime muestra cuanto tiempo ha estado encendido el dispositivo desde que ocurrito el evento
+
+	input: service sequence-numbers # muestra el numero de secuencia
+
+### FTP and TFTP
+
+! ver el sistema de archivos en un router
+	input: show file systems
+
+! copying files ftp
+	input: ip ftp username [username] # nombre de usuario para autenticarnos con el servidor ftp
+	input: ip ftp password [password] # contraseña para autenticarnos con el servidor ftp
+	input: copy ftp: flash: # copiar el archivo del servidor a la memoria flash
+		Address or name of remote host : [ip o nombre del servidor]
+		Source filename : [nombre del archivo]
+		Destination filename : [nombre del archivo]
+	input: boot system [filepath] # para arrancar desde el nuevo archivo IOS
+	
+### NAT ###
+### static nat
+
+! definir inside interface a la red interna
+	input: interface [puerto]
+	input: ip nat inside
+
+! definir outside interface a la red externa
+	input: interface [puerto]
+	input: ip nat outside
+
+! configurar one to one ip address mapping
+	input: ip nat inside source static [inside local ip] [inside global ip]
+
+! ver las traducciones nat
+	input: show ip nat translations
+
+! limpiar la tabla nat de traducciones
+	input: clear ip nat translation *
+
+! ver las estadisticas de traducciones
+	input: show ip nat translations
+
+### dynamic nat
+
+! definir inside interface a la red interna
+	input: interface [puerto]
+	input: ip nat inside
+
+! definir outside interface a la red externa
+	input: interface [puerto]
+	input: ip nat outside
+
+! crear la lista de acceso (define el trafico permitido para la traduccion)
+	input: access-list [numero] permit [ip de subred] [wildcard] 
+
+! definir el pool para las global ip addresses
+	input: ip nat pool [name] [primera ip] [ultima ip] [netmask [mascara de subred] | prefix length [1 - 32]]
+
+! configurar dynamic nat by mapping acl to the pool
+	input: ip nat inside source list [numero] pool [name]
+
+! configurar pat
+	input: ip nat inside source list [numero] pool [name] overload
+
+! configurar pat en interface
+	input: ip nat inside source list [numero] interface [port] overload
+
+### QOS ###
+### POE
+
+! configurar power policing en la interfaz # esta configuracion pone error disabled y manda un mensaje syslog si requiere mucho poder
+	input: interface [puerto]
+	input: power inline police action err-disable
+
+! configurar power policing en la interfaz # esta configuracion no apaga el puerto, reinicia el puerto y manda un mensaje syslog
+	input: interface [puerto]
+	input: power inline police action log
+
+! ver el power police en la interfaz
+	input: show power inline police [puerto]
+
+! configurar en un router qos (identificar el tipo de trafico a tratar para aplicar qos)
+	input: class-map [NAME ejemplo HTTPS_MAP]
+	input: match protocol [protocolo]
+
+! configurar la politica a las clases
+	input: policy-map [NAME]
+	input: class [clase ya creada com HTTPS_MAP]
+	input: set ip dscp [valor qos ejemplo AF31] # setear el valor de dscp
+	input: priority percent [porcentaje] # el porcentaje del trafico para la clase
+	input: bandwith percent [porcentaje] # en caso no tenga prioridad
+
+! habilitar el servicio de politica en la interface
+	input: interface [puerto]
+	input: service-policy [ input | output ] [nombre del policy-map ya creado]
+
+### PORT SECURITY ###
+
+! habilitar port security en la interfaz # antes de eso se tiene que cambiar el modo de acceso ya sea acceso o troncal
+	input: interface [puerto]
+	input: switchport port-security
+
+! ver la configuracion de seguridad del puerto
+	input: show port-security interface [puerto]
+
+! reenabling the port after err-disabled
+	input: interface [puerto]
+	input: shutdown
+	input: no shutdown
+
+! ver errdisable recovery
+	input: show errdisable recovery
+
+! habilitar las interfaces mediante el metodo errdisable
+	input: errdisable recovery cause psecure-violation
+	input: errdisable recovery interval [tiempo]
+
+! habilitar aging time a una interface
+	input: interface [puerto]
+	input: switchport port-security aging time [# en minutos]
+	input: switchport port-security aging type [absolute | inactivity]
+	input: switchport port-security aging static
+
+! habilitar el modo de violacion
+	input: switchport port-security
+	input: switchport port-security mac-address # estatica
+	input: switchport port-security [shutdown | restrict | protect]
+
+! ver los puertos con seguridad de puerto
+	input: show port-security
+
+! ver la tabla de direcciones mac seguras
+	input: show mac address-table secure
+
+### DHCP SNOOPING ###
+
+! configurar ip dhcp snooping
+	input: ip dhcp snooping
+	input: ip dhcp snooping vlan [numero] # aplicar dhcp snooping a la vlan correspondiente
+	input: no ip dhcp snooping information option # IMPORTANTE CUANDO SE CONECTAN VARIOS SWITCHES ENTRE SI
+	input: interface [puerto] # interface en donde se aplicará el trust
+	input: ip dhcp snooping trust
+
+! ver la tabla dhcp snooping
+	input: show ip dhcp snooping binding
+
+### ARP INSPECTION ###
+
+! habilitar arp inspection en una vlan
+	input: ip arp inspection vlan [numero de vlan]
+	input: interface [range] [puerto] # seleccionar los puertos en donde se aplicaran el arp inspection trust
+	input: ip arp inspection trust
+
+! ver la inspeccion arp en las interfaces
+	input: show ip arp inspection interfaces
+
+! configurar el rate limit en una interfaz o un rango de interfaz
+	input: interface range [puertos]
+	input: ip arp inspection limit rate [numero] burst interval [numero] # por defecto el numero de paquetes es 15 x segundo
+
+! ver ip arp inspection
+	input: show ip arp inspection
+
+! validar ip arp inspection
+	input: ip arp inspection validate [dst-mac | ip | src-mac]
+ 
+### OSPF ###
+
+! configurar el network type en una interface
+	input: r1(config-if)# ip ospf network [options]
+
+! cambiar el ancho de banda de referencia
+	input: r1(config-router)# auto-cost reference [# mbps]
+
+! cambiar el ancho de banda de una interface
+	input: r1(config-if)# bandwith [# kbps]
+
+! cambiar la velocidad a la que opera la interface
+	input: r1(config-if)# speed [#]
+
+! cambiar el costo de la interface
+	input: r1(config-if)# ip ospf cost [#]
+
+! activar ospf directamente a la interface
+	input: r1(config-if)# ip ospf [proceso] area [area]
+
+! configurar todas la interfaces como pasivas ospf
+	input: r1(config-router)# passive-interface default
+
+! configurar luego una interface como activa
+	input: r1(config-router)# passive-interface [interface]
+	input: r1(config-router)# no passive-interface [interface]
+
+! configurar la prioridad de una interface
+	input: r1(config-if)# ip ospf priority [0-255]
+
+! cambiar la velocidad de operacion de una interface
+	input: r1(config-if)# clock rate [# bits per second] # only DCE
+
+! configurar la encapsulacion de la interface # default encapsulation es HDLC
+	input: r1(config-if)# encapsulation ppp # ambos lados configurar
+
+! ver el clock rate con el comando show
+	input: r1# show controllers [interface]
+
+! establecer autenticacion en la interface para permitir formar vecinos # en ambos routers que compartan el mismo enlace
+	input: r1(config-if)# ip ospf authentication-key [palabra]
+	input: r1(config-if)# ip ospf authentication
+
+! establecer el tamaño de mtu en la interface # por defecto es 1500 bytes
+	input: r1(config-if)# ip mtu [68-1500]
+
+! resetear el proceso ospf
+	input: r1# clear ip ospf process *
+
+! configurar autenticacion ospf # tiene que configurarse en ambos routers del mismo enlace para que se conviertan vecinos
+	→ null authentication
+	→ plaint text authentication
+	→ MD5 authentication
+
+	input: r1(config-router)# area [area] authentication # activa en todas las interfaces de un area en particular
+	input: r1(config-if)# ip ospf authentication-key [password] # activa en una interface
+
+	input: r1(config-router)# area 0 authentication message-digest # activa en todas las interfaces de un area en particular
+	input: r1(config-if)# ip ospf message-digest-key [key] md5 [password] # activa en una interface
+
+### Security ###
+
+! diferentes tipos de enable secret con diferentes hashes
+	input: R1(config)# enable secret [password] ### tipo 5 | algoritmo MD5
+	input: R1(config)# enable algorithm-type sha256 secret [password] ### tipo 8 | algoritmo SHA-256
+	input: R1(config)# enable algorithm-type scrypt secret [password] ### tipo 9 | algoritmo SHA-256
+
+! creacion de usuarios y contraseñas
+	input: R1(config)# username [name] secret [password] ### tipo 5 | algoritmo MD5
+	input: R1(config)# username [name] algorithm-type sha256 secret [password] ### tipo 8 | algoritmo SHA-256
+	input: R1(config)# username [name] algorithm-type scrypt secret [password] ### tipo 9 | algoritmo SHA-256
+
+! controlando el acceso vty con lista de acceso
+	input: R1(config)#access-list [#] permit [host o subred con su respectivo wildcard] ### creacion de lista de acceso para acceso vty
+	input: R1(config-line)# access-class [#] in ### solo permite el acceso gracias al ACL
+
+### Routing ###
+
+! ver la tabla MAC del router 
+	input: R1# show ip arp
+	input: R1# show arp
+
+! definir una ruta estática permanente
+	input: R1(config)# ip route [subnet id] [mask] permanent
+
+! ver la mejor la mejor ruta para una direccion ip
+	input: R1# show ip route [ip address]
+
+! configurar una vlan nativa cuando se usa ROAS ### hay dos formas
+	input: R1(config-subif)# encapsulation dot1Q [vlan id] native ### la vlan nativa en la subinterface
+	input: R1(config-if)# ip address [ip address] [subnet mask] ### la vlan nativa en la interface fisica
+
+! ver informacion de virtual lans
+	input: R1# show vlans 
+
+! habilitar enrutamiento en un switch de capa 3 ### depende del modelo de router
+	input: R1(config)# sdm prefer lanbase-routing
+	input: R1# reload
+	input: R1(config)# ip routing
+
+! configurar etherchannel layer 3
+	input: R1(config)# interface range [rango]
+	input: R1(config-if)# channel-group [numero] mode on
+	input: R1(config-if)# no switchport
+
+	input: R1(config-if)# interface port-channel [numero]
+	input: R1(config-if)# no switchport
+	input: R1(config-if)# ip address [ip address] [netmask]
+
+### syslog ###
+
+! configurar parametros de loggin en la consola
+	input: R1(config)# logging console ### esta opcion viene por defeto, si le agrego [no] al principio los eventos no se muestran en la consola
+
+! configurar parametros de logging en sesion vty
+	input: R1# terminal monitor ### esto me permite ver los eventos cuando inicio sesion via remota, por defecto esta desactivado
+
+! guardar los mensajes syslog en el buffer, memoria RAM
+	input: R1(config)# logging buffered [#4096-2147483647]
+
+! mostrar los mensajes syslog
+	input: R1# show logging
+
+! mandar los mensajes syslog a un servidor
+	input: R1(config)# logging host [ip address del servidor]
+	input: R1(config)# logging trap [level name | level number] ### setear el nivel de severidad al mandar los logs al servidor
+
+! deshabilitar marcas de tiempo en los mensajes log
+	input: R1(config)# no service timestamp [datetime | uptime] ### por defecto viene activado
+
+! habilitar el servicio de secuencia de numeros
+	input: R1(config)# service sequence-numbers
+
+! habilitar marcas de tiempo en los mensajes log
+	input: R1(config)# service timestamps log datetime msec
+
+! setear el nivel de severidad ### esto aplica para consola o vty
+	input: R1(config)# logging console [keyword] [level number]
+
+! limpiar el buffer log
+	input: R1# clear logging
+
+! ver los procesos del cpu del dispositivo
+	input: R1# show processes cpu
+
+### NTP ###
+
+! configurar la zona horaria
+	input: R1(config)#clock timezone [nombre] [offset horas] [offset minutos]
+	input: R1(config)#clock timezone PET -5 0 ### ejemplo con zona horaria peru (PET es tiempo en Peru)
+
+! configurar el clock summertime
+	input: R1(config)#clock summer-time [nombre] recurring
+
+! configurar la hora
+	input: R1# clock set 11:08:00 11 july 2022
+
+! configurar un router solo como servidor
+	input: R1(config)# ntp master [stratum level]
+
+! configurar un router solo como servidor y cliente
+	input: R1(config)# ntp server [ip address | hostname] ### ip del servidor ntp
+
+! ver la configuracion ntp
+	input: R1# show ntp status
+
+! ver las asociaciones ntp
+	input: R1# show ntp associations
+
+! configurar el loopback y asociarla a la ntp
+	input: R1(config)# interface loopback [numero]
+	input: R1(config-if)# ip address [address] [subnet mask]
+	input: R1(config)# ntp source loopback [numero]
+
+! ver reloj
+	input: R1# show clock
+
+! ver informacion mas detallada del reloj
+	input: R1# show clock detail
+
+! configurar la hora del hardware interno
+	input: R1# calendar set [hora] [dia] [mes] [año]
+
+! configurar la hora software
+	input: R1# clock set [hora] [dia] [mes] [año]
+
+! sincronizar la hora calendaria a la hora del reloj
+	input: R1# clock update-calendar
+
+! sincronizar la hora del reloj a la hora del calendario
+	input: R1# clock read-calendar
+  
+ ! configurar ntp peer en ambos routers
+ 	input: R1(config)# ntp peer [ip address del server que pertenece al mismo stratum] ### en ambos routers
+
+ ! configurar autenticacion ntp ### lado del servidor
+ 	input: R1(config)# ntp authenticate
+ 	input: R1(config)# ntp authenticatio-key [key-number] md5 [key]
+ 	input: R1(config)# ntp trusted-key [key-number]
+
+! configurar autenticacion ntp ### lado del cliente 1
+ 	input: R1(config)# ntp authenticate
+ 	input: R1(config)# ntp authenticatio-key [key-number] md5 [key]
+ 	input: R1(config)# ntp trusted-key [key-number]
+ 	input: R1(config)# ntp server [ip address del servidor] key [key-number]
+ 	input: R1(config)# ntp peer [ip address del peer] key [key-number]
+
+! configurar autenticacion ntp ### lado del cliente 2
+ 	input: R1(config)# ntp authenticate
+ 	input: R1(config)# ntp authenticatio-key [key-number] md5 [key]
+ 	input: R1(config)# ntp trusted-key [key-number]
+ 	input: R1(config)# ntp server [ip address del servidor] key [key-number]
+ 	input: R1(config)# ntp peer [ip address del peer] key [key-number]
+
+! configurar de manera global cdp
+	input: R1(config)# cdp run ### habilitar de manera global (por defecto)
+	input: R1(config)# no cdp run ### deshabilitar de manera global
+	input: R1(config-if)# cdp enable ### habilitar en la interface
+	input: R1(config-if)# no cdp enable ### deshabilitar en la interface
+
+! modificar los tiempos por defecto cdp
+	input: R1(config)# cdp timer [tiempo]
+	input: R1(config)# cdp holdtime [tiempo]
+
+!!! cdp interval → 60 seconds
+!!! cdp deadtime → 180 seconds
+
+### vtp ###
+
+! ver el status de vtp
+	input: show vtp status
+
+! cambiar el nombre del dominio vtp
+	input: vtp domain [nombre]
+
+! poner modo cliente un switch ### en este modo el switch no puede crear, modificar vlans
+	input: vtp mode cliente
+
+! ver la version vtp
+	input: show vtp version
+
+### etherchannel ###
+
+! ver el balance en la interface
+	input: show etherchannel load-balance
+
+! configurar el load balance
+	input: port-channel load-balanc [src-dst-mac | src-dst-ip]
+
+### tunnel grep ### estamos tomando en cuenta de que hay dos routers que se van a comunicar de manera remota site to site
+ 
+! en el router R1 (lado izquiero)
+	input: interface tunnel [0]
+
+! configurar el modo en el interface del tunnel
+	input: tunnel mode gre ip
+
+! configurar el source interface del tunel
+	input: tunnel source [puerto]
+
+! configurar el destination interface del tunel
+	input: tunnel destination [ip publica de la interface de salida del otro router]
+
+! configuracion de ip del tunel
+	input: ip address [ip] [subnet mask]
+
+! configuracion de manera general
+	input: interface tunnel 0
+	input: tunnel mode gre ip
+	input: tunnel source [ip interface publica]
+	input: tunnel destination [ip interface publica]
+	input: ip address [ip interface tunel salida]
+
+#### IPSec ###
+
+! configurando en R1
+	input: R1(config)#crypto isakmp policy 1
+	input: R1(config-isakmp)#authentication pre-share
+	input: R1(config)#crypto isakmp key 6 cisco address [dst ip]
+	input: crear la lista de acceso para permitir
+	input: R1(config)#crypto ipsec transform-set MYSET esp-sha-hmac esp-aes
+	input: R1(config)#crypto map MYMAP 1 ipsec-isakmp
+	input: R1(config-crypto-map)#set transform-set MYSET
+	input: R1(config-crypto-map)#set peer 40.40.40.2
+	input: R1(config-crypto-map)#match address [id access list]
+	input: R1(config)#interface [id port]
+	input: R1(config-if)#crypto map MYMAP
+	input: R1#show crypto map
+
+### Redistribucion de rutas ###
+
+! redistribuir eigrp en ospf
+	input: R1(config)#router eigrp [AS]
+	input: R1(config-router)#redistribute ospf [process]
+	input: R1(config-router)#default-metric [bandwidth Kb/s] [delay ms] [reliability 0-255] [effective bandwidth 1-255] [MTU] ### tambien se puede configurar con route-map
+
+! redistribuir ospf en eigrp
+	input: R1(config)# router ospf [process]
+	input: R1(config-router)#redistribute eigrp [AS] subnets
+	input: R1(config-router)#default-metric [metric]
+	input: R1(config-router)#redistribute eigrp [AS] subnets metric-type 1 ### se suma el costo interno del dominio ospf mas el costo por defecto, es mucho mas preciso
+
+###  1  Set OSPF External Type 1 metrics
+###  2  Set OSPF External Type 2 metrics
+
+### si queremos sumarizar rutas:
+! ABR → area range
+! ASBR → summary-address
+
+! ASBR → input: R1(config-router)#summary-address [ip sumarizada] [subnet mask] ### summary address SOLO en ASBR
+! ABR → input: R1(config-router)#area [#] range [ip sumarizada] [subnet mask] ### area range SOLO en ABR
+
+! configurar area stub en todos los routers dentro del area ### se crea una ruta por defecto para las areas externas
+	input: R1(config-router)#area [#] stub
+
+! configurar area totally stub en todos los routers dentro del area ### se crea una ruta por defecto para las areas externas e interareas
+	input: R1(config-router)#area [#] stub no-summary
+
+! configurar area nssa en todos los routers dentro del area ### los routers configurados de este modo no se comunican con las demas areas externas, a menos que 
+	input: R1(config-router)#area [#] nssa
+
+! configurar area nssa en todos los routers dentro del area ### esto solo se configura en el router ABR, de este modo se crea una ruta por defecto para las demas areas externas
+	input: R1(config-router)#area [#] nssa default-information-originate
+
+! poner un nombre a un host usando la ip
+	input: R1(config)#ip host [nameHost] [ip address host]
+
+! ver la configuracion auto-mdix
+	input: show controllers ethernet-controller f0/0 phy
+
+! configurar port mirroring en el switch
+	input: S1(config)#monitor session 1 source interface f0/1
+	input: S1(config)#monitor session 1 destinantion interface f0/2
+
+-----------------------------------------------
+DMVPN (HUB & SPOKE)
+-----------------------------------------------
+configuracion LADO HUB
+	interface Tunnel1
+		ip address 172.16.10.1 255.255.255.0 // ip del tunel
+		no ip redirects
+		ip mtu 1500
+		no ip next-hop-self eigrp 1
+		no ip split-horizon eigrp 1
+		ip nhrp authentication cisco
+		ip nhrp map multicast dynamic
+		ip nhrp network-id 1
+		tunnel source GigabitEthernet0/0
+		tunnel mode gre multipoint
+		tunnel key 123
+	end
+	
+configuracion LADO SPOKE
+	interface Tunnel1
+		ip address 172.16.10.2 255.255.255.0
+		no ip redirects
+		ip nhrp authentication cisco
+		ip nhrp map multicast 100.100.100.1
+		ip nhrp map 172.16.10.1 100.100.100.1
+		ip nhrp network-id 1
+		ip nhrp nhs 172.16.10.1
+		tunnel source GigabitEthernet0/0
+		tunnel mode gre multipoint
+		tunnel key 123
+	end
