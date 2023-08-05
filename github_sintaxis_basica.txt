@@ -1,0 +1,60 @@
+// Encabezados
+	# Encabezado 1
+	## Encabezado 2
+	### Encabezado 3
+	#### Encabezado 4
+	##### Encabezado 5
+	###### Encabezado 6
+
+
+// Estilo de texto
+	_texto en cursiva_
+	**texto en negrita**
+	***texto en negrita y cursiva***
+
+
+// Listas numeradas y con viñetas
+	1. Primer elemento
+	2. Segundo elemento
+	3. Tercer elemento
+	
+	- Elemento 1
+	- Elemento 2
+	- Elemento 3
+
+
+// Enlaces
+	[Texto del enlace](URL)
+	[Visita mi sitio web](https://www.ejemplo.com)
+
+
+// Imágenes
+	![Texto alternativo](URL de la imagen)
+	![Logo de Markdown](https://i.imgur.com/9gf1420.png)
+
+	<img src="URL de la imagen" alt="Texto alternativo" width="200" height="150">
+	<img src="https://i.imgur.com/9gf1420.png" alt="Texto alternativo" width="200" height="150">
+
+
+// Citas
+	> Esto es una cita.
+
+
+// Comillas
+	```python
+	def saludar():
+	print("¡Hola, mundo!")
+	```
+
+
+// Líneas horizontales
+	---
+	***
+
+
+// Tablas
+	| Encabezado 1 | Encabezado 2 |
+	|------------- |-------------|
+	| Celda 1,1    | Celda 1,2    |
+	| Celda 2,1    | Celda 2,2    |
+

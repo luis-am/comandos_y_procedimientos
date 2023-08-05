@@ -1,30 +1,33 @@
-Generar un par de llaves de tipo 'ed25519', la opción '-t' significa tipo y '-C' es el comentario.
+### Generación de llaves para conexión a Github.
+
+---
+
+Generar un par de llaves de tipo de sistema de cifrado'ed25519', la opción '-t' significa tipo y '-C' es el comentario.
 	
-	input: ssh-keygen -t ed25519 -C "Conexion hacia GitHub."
+	ssh-keygen -t ed25519 -C "Conexion hacia GitHub."
 
-Verificar el checksum de llave publica
+Verificar el checksum de llave publica, donde '-l' es para mostrar la longitud de la clave y el fingerprint. La opción 'f' es para seleccionar el archivo de clave que se usará para la operación.
 
-	input: ssh-keygen -l -f ~/.ssh/id_ed25519_github.pub
+	ssh-keygen -l -f ~/.ssh/id_ed25519_github.pub
 
-Iniciar el agente ssh en el background
+Iniciar el agente ssh en el background.
 
-	input: eval "$(ssh-agent -s)"
+	eval "$(ssh-agent -s)"
 
-Añadir la llave privada al agente
+Añadir la llave privada al agente.
 
-	input: ssh-add ~/.ssh/id_ed25519_github
+	ssh-add ~/.ssh/id_ed25519_github
 
-Verificar el fingerprint de la llave publica en el agente
+Verificar el fingerprint de la llave publica en el agente, donde '-l' es para listar las claves, y '-E' para especificar el algoritmo.
 
-	input: ssh-add -l -E sha256
+	ssh-add -l -E sha256
 
-Copiar la llave publica en GitHub
+Copiar la llave publica de Github.
 
-	input: cat ~/.ssh/id_ed25519_github.pub | xclip -selection clipboard
+	cat ~/.ssh/id_ed25519_github.pub | xclip -selection clipboard
 
-Probar conectividad con GitHub
+Probar conectividad con GitHub, donde '-T' significa deshabilitar la pseudoterminal.
 	
-	input: ssh -T git@github.com
-	output: Hi luis-am! You've successfully authenticated, but GitHub does not provide shell access. 
-	-T: deshabilitar pseudoterminal
+	ssh -T git@github.com
 
+> Output: Hi luis-am! You've successfully authenticated, but GitHub does not provide shell access. 
