@@ -157,7 +157,7 @@ Listar las redes de Docker
 
 	docker network ls
 
-Ejemplo de ejcutar un contenedor
+Ejemplo de ejecutar un contenedor
 
 	docker run -itd --rm --name thor busybox
 
@@ -255,3 +255,67 @@ Para agregar una nueva ruta en Linux
 - macvlan(vlan)
 - ipvlan(L2)
 - ipvlan(L3)
+
+---
+
+### Estructura de un DockerFile
+
+FROM: Cada dockerfile debe empezar con la instrucción 'FROM', esto define la imagen base para iniciar el proceso de 'build'. Para el ejemplo se utiliza como imagen padre a 'ubuntu'.
+
+	FROM [IMAGE]
+	FROM ubuntu
+
+ENV: Establece las variables de entorno que es requerido para ejecutar el proyecto.
+
+	ENV [KEY] [VALUE]
+	ENV	HTTP_PORT='9000'	
+
+WORKDIR: Esto dice a docker que el resto de los comandos serán ejecutados en el contexto de /app folder dentro de la imagen. En el ejemplo se creará el directorio /app en el contenedor.
+
+	WORKDIR [/path/to/workdir]
+	WORKDIR /app
+
+RUN: Ejecuta cualquier comando en una nueva capa encima de la imagen actual y commit los resultados.
+
+	RUN [COMMAND]
+	RUN /bin/bash -c 'source $HOME/ .bashrc; echo $HOME'
+
+ENTRYPOINT
+
+CMD
+
+COPY
+
+ADD
+
+
+EXPOSE
+
+---
+
+### Hacer persistente los datos
+
+Ruta en donde están los volúmenes.
+
+	/var/lib/docker/volumes/almacen/
+
+Crear un volúmen.
+
+	docker volume create [VOLUME_NAME]
+
+Listar los volúmenes.
+
+	docker volume ls
+
+Eliminar un volúmen.
+
+	docker volume rm [VOLUME_NAME]
+
+Inspeccionar un volúmen.
+
+	docker volume inspect [VOLUME_NAME]
+	
+Ejemplo de como vincular un volúmen a un directorio del contenedor, donde '-v', especifica el volúmen.
+
+	docker run -it --name [NAME_CONTAINER] -v [VOLUME_NAME]:[DIRECTORY_CONTAINER] [IMAGE_NAME]
+	docker run -it --name webserver -v data:/home ubuntu

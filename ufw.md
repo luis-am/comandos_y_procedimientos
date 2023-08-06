@@ -1,10 +1,6 @@
-### Servicio de Firewall
-
----
+## Servicio de Firewall
 
 #### ufw - Uncomplicated Firewall
-
-<br>
 
 Habilitar, deshabilitar.
 
