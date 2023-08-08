@@ -14,6 +14,12 @@
 
 - La opción ssh 'StrictHostKeyChecking=no' es para aceptar de manera automática fingerprints de desconocidos.
 
+### Teoría
+
+Un **inventario** es la lista de hosts o nodos en el cual se desea gestionar la configuración y la automatización. Este inventario tiene detalles de los hosts, como direcciones IP, nombres y los grupos al cual pertenecen y otras variables de configuración. 
+
+Un **playbook** es un archivo en formato YAML que contiene las instrucciones para definir y ejecutar las tareas a un determinado target. Cada playbook puede tener una o más tareas
+
 ---
 
 Ruta del archivo de configuracion de ansible
@@ -130,3 +136,24 @@ Cada vez que ejecutamos un playbook siempre se realiza la tarea del módulo 'set
 	ok: [centos1]
 	lok: [centos3]
 	ok: [centos2]
+
+Para ejecutar un playbook, y ese playbook necesita de la contraseña sudo, añadimos el switch '-K'.
+
+	ansible-playbook playbook.yaml -K
+
+---
+
+### Módulo 'file' 
+
+	tasks:
+	  -name: crear nuevo archivo con permisos
+	  file:
+	    path:/path/to/create/file.txt
+		state: touch
+		mode: 0421
+		owner: owner
+		group: group
+
+Links
+
+- [Simple automation for all your Linux servers with Ansible - Christian Lempa](https://www.youtube.com/watch?v=uR1_hlHxvhc&ab_channel=ChristianLempa)

@@ -45,6 +45,10 @@ Ver que contenedores estan corriendo
 
 	docker ps
 
+Ver las estadísticas de los contenedores que están corriendo.
+
+	docker stats
+
 Detener contenedor que esta corriendo
 
 	docker stop [CONTAINER ID]
@@ -98,9 +102,6 @@ Eliminar una red
 
 	docker network rm [CONTAINER_NAME]
 
-Ver la version de docker compose
-
-	docker-compose --version
 
 Ejemplo para nginx
 
@@ -145,13 +146,37 @@ Directorio en donde se guardan las imagenes
 
 	/var/lib/docker/overlay2
 
-Poner arriba con docker compose
+---
+
+### Docker-compose
+
+Ver la version de docker compose.
+
+	docker-compose --version
+
+Poner arriba con docker compose, siempre y cuando el archivo yaml esté por defecto el nombre 'docker-compose.yaml'
 
 	docker-compose up
+
+Poner arriba con docker compose, cuando tiene un nombre diferente a 'docker-compose.yaml'
+
+	docker-compose up -f [FILE.yaml]
 
 Poner abajo con docker compose
 
 	docker-compose down
+
+Listar los docker-compose en ejecución.
+
+	docker-compose ps
+
+Listar todos los docker-compose.
+
+	docker-compose ps -a
+
+---
+
+### Redes en docker
 
 Listar las redes de Docker
 
@@ -159,7 +184,7 @@ Listar las redes de Docker
 
 Ejemplo de ejecutar un contenedor
 
-	docker run -itd --rm --name thor busybox
+	docker run -tid --rm --name thor busybox
 
 		run: crear y ejecutar un contenedor a partir de una imagen.
 		-i: entrada interactiva, permite interacción con el mismo.
@@ -184,13 +209,43 @@ Para asignar un contenedor a la network 'host'
 
 	docker run -itd --rm --network host --name [NAME] [IMAGE]
 
-Para crear una network de tipo MacVlan(bridge)
+#### MACVLAN (bridge)
 
-	docker network crete -d macvlan \
-	--subnet 10.0.0.0/27
-	--gateway 10.0.0.30
-	-o parent enp42s0	
-	[NETWORK_NAME]
+Para crear una network de tipo MacVlan(bridge), este se vincula a la interface de nuestra red local. Para este ejemplo estamos utilizando la interface 'enp42s0'. Importante aquí es poder establecer un rango de IP's ya que al asignarlo autmáticamente a los containers puede haber conflicto. Esto es obviamente opcional pero es lo recomendable. El 'aux-address' es para reservar esa IP, esto prevendrá que docker use esta IP para asignar a un container.
+
+	docker network create -d macvlan -o parent=enp42s0 \
+	--subnet [x.x.x.x/x] \
+	--gateway [x.x.x.x] \
+	--ip-range [x.x.x.x/x] \ # opcional
+	--aux-address 'host=x.x.x.x' \ # opcional
+	--[NETWORK NAME]
+
+	docker network create -d macvlan -o parent=enp42s0 \
+	--subnet 10.0.0.0/24 \
+	--gateway 10.0.0.30 \
+	--ip-range 10.0.0.192/26 \
+	--Mi_Red
+
+La gran desventaja de **macvlan(bridge)**, es que no puede haber comunicación entre contenedores y el host. Pero podemos encontrar una solución para esto. Para esto primero crearemos una nueva interface macvlan en el host.
+
+	ip link add [NOMBRE INTERFACE] link [INTERFACE] type macvlan mode bridge
+	ip link add mynet-luis link enp42s0 type macvlan mode bridge
+
+Establecemeos una IP en específico podemos hacerlo también.
+
+	ip addr add [x.x.x.x/x] dev [NOMBRE INTERFACE]
+	ip addr add 10.0.0.29/32 dev mynet-luis
+
+Luego de eso ponemos arriba la interface con el siguiente comando.
+
+	ip link set mynet-luis up
+
+Ahora creamos una ruta para llegar al contenedor o el rango de contenedores
+
+	ip route add [x.x.x.x/x] dev [NOMBRE INTERFACE]
+	ip route add 10.0.0.192/27 dev mynet
+
+#### MACVLAN (vlan)
 
 Para crear una network de tipo MacVlan (vlan)
 
@@ -319,3 +374,7 @@ Ejemplo de como vincular un volúmen a un directorio del contenedor, donde '-v',
 
 	docker run -it --name [NAME_CONTAINER] -v [VOLUME_NAME]:[DIRECTORY_CONTAINER] [IMAGE_NAME]
 	docker run -it --name webserver -v data:/home ubuntu
+
+Links
+
+- [Docker networking is CRAZY!! (you NEED to learn it) - Network Chuck](https://www.youtube.com/watch?v=bKFMS5C4CG0&ab_channel=NetworkChuck)
