@@ -346,6 +346,10 @@ ADD
 
 EXPOSE
 
+Para construir un Dockerfile ejecutamos lo siguiente, la opción '-t' indica el tag de la nueva imagen y el punto significa que busque en el directorio actual.
+
+    docker build -t luisam .
+
 ---
 
 ### Hacer persistente los datos

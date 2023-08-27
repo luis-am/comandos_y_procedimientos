@@ -102,3 +102,17 @@
 - PDFsam OK
 - MiniTool OK
 - Gnomeclocks OK
+
+---
+
+### Linux
+
+- Openboard
+- Flameshot
+- Gromit MPX
+- Input Remapper
+- Kcal
+- Okular
+- OBS Studio
+- PDF Arranger
+- PulseAudio

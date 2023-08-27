@@ -511,3 +511,9 @@ Abrir el gestor de certificados
 Ver todas las opciones de un archivo sin presionar click derecho
 
 	alt + f
+
+Habilitar el gestor de arranque al reinicio de sistema
+
+    bcdedit /set {bootmgr} displaybootmenu [yes|no]
+    bcdedit /set {bootmgr} timeout #
+    bcdedit /set {bootmgr} timeout 20
