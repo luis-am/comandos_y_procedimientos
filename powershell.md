@@ -77,8 +77,7 @@ Ver información de IP
 	New-NetIPAddress -InterfaceIndex [indexNumber] -IPAddress [IP] -PrefixLength [prefix] -DefaultGateway [IP]
 	Set-DnsClientServerAddress -InterfaceIndex [indexNumber] -ServerAddresses "[IP1] , [IP2]"
 
-// MOSTRAR LA CONFIGURACIÓN ACTUAL:
-	netsh interface ipv4 show config
+// MOSTRAR LA CONFIGURACIÓN ACTUAL:	netsh interface ipv4 show config
 
 // ESTABLECER LA IP ESTÁTICA, MÁSCARA DE SUBRED Y EL GATEWAY
 	netsh interface ipv4 set address name="YOUR INTERFACE NAME" static IP_ADDRESS SUBNET_MASK GATEWAY
