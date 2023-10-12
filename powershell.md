@@ -76,3 +76,28 @@ Ver información de IP
 	Get-NetAdapter -InterfaceIndex 10			// ver informacion breve de adaptadores
 	New-NetIPAddress -InterfaceIndex [indexNumber] -IPAddress [IP] -PrefixLength [prefix] -DefaultGateway [IP]
 	Set-DnsClientServerAddress -InterfaceIndex [indexNumber] -ServerAddresses "[IP1] , [IP2]"
+
+// MOSTRAR LA CONFIGURACIÓN ACTUAL:
+	netsh interface ipv4 show config
+
+// ESTABLECER LA IP ESTÁTICA, MÁSCARA DE SUBRED Y EL GATEWAY
+	netsh interface ipv4 set address name="YOUR INTERFACE NAME" static IP_ADDRESS SUBNET_MASK GATEWAY
+
+// ESTABLECER IP DINÁMICA	
+	netsh interface ipv4 set address name="YOUR INTERFACE NAME" source=dhcp
+
+// ESTABLECER EL DNS
+	netsh interface ipv4 set dns name="YOUR INTERFACE NAME" static DNS_SERVER
+
+// ESTABLECER EL SEGUNDO DNS
+	netsh interface ipv4 set dns name="YOUR INTERFACE NAME" static DNS_SERVER index=2
+
+// CAMBIAR EL HOSTNAME
+	Rename-Computer -NewName "HOSTNAME"
+
+// OBTENER EL HASH DE UN FILE
+	Get-FileHash -Algorithm md5 test.txt
+
+// APAGAR O REINICIAR LA COMPUTADORA
+	shutdown /s /t 0
+	shutdown /r /t 0
