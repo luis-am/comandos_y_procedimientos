@@ -4,102 +4,115 @@ activar captura de pantalla
 
 	Print Screen
 
-pencil tool
+Set the Pencil as the paint tool
 
 	p
 
-line tool
+Set the Line as the paint tool
+
 
 	l
 
-arrow tool
+Set the Arrow as the paint tool
 
 	a
 
-selection rectangle tool
+Set Selection as the paint tool
 
 	s
 
-fill rectangle tool
+Set the Rectangle as the paint tool
 
 	r
 
-circle tool
+Set the Circle as the paint tool
 
 	c
 
-marker tool
+Set the Marker as the paint tool
 
 	m
 
-add text tool
+Add text to your capture
 
 	t
 
-pixelate tool
+Set the Pixelate as the paint tool
 
 	x
 
-inverter tool
+Set the Inverter as the paint tool
 
 	i
 
-mover el area de seleccion
+Move the selection area
 
 	ctrl + m
 
-deshacer
+Undo the last selection
 
 	ctrl + z
 
-rehacer
+Redo the next modification
 
 	ctrl + y
 
-copiar al portapapeles
+Copy selection to clipboard
 
 	ctrl + c
 
-guardar la captura a la carpeta predeterminada
+Save screenshot to a file
 
 	ctrl + s
 
-subir la seleccion
+Upload the selection
 
 	ctrl + d
 
-abrir panel lateral
+Choose an app to open the capture
 
-	espacio
+	ctrl + o
 
-seleccionar pantalla completa
+Toggle side panel
+
+	Space
+
+Select entire screen
 
 	ctrl + a
 
-mover la captura con direccionales
+Move selection with directionals
 
 	up, down, right, left
 
-redimensionar la captura
+Resize selection
 
 	ctrl [up | down | right | left]
 
-autoincrementing tool
+Add an autoincrementing counter bubble
 
 	1
 
-salir de la captura
+Quit capture
 
 	esc, ctrl + q
 
-historial de capturas
+Screenshots history
 
 	shift + print Screen
 
-seleccionar color de paleta
+Show color picker
 
 	right click
 
-cambiar el tamaño de la herramienta
+Change the tool's size
 
-	mouse wheel
+	Mouse wheel
+
+Pin image on the desktop
+
+	Alt + d
+
+Accept the capture
+
+	Enter
