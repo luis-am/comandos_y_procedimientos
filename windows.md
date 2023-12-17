@@ -517,3 +517,9 @@ Habilitar el gestor de arranque al reinicio de sistema
     bcdedit /set {bootmgr} displaybootmenu [yes|no]
     bcdedit /set {bootmgr} timeout #
     bcdedit /set {bootmgr} timeout 20
+
+Abrir el directorio activo
+
+    dsa.msc
+
+

@@ -1,107 +1,108 @@
-- 7zip NOK
-- anki NOK
-- anydesk OK
-- audacity OK
-- bizagui NOK
-- ciscopackettracer NOK
-- crystaldiskinfo NOK
-- crystaldiskmark NOK
-- discord NOK
-- draw.io NOK
-- filezilla NOK
-- flameshot OK
-- furmark NOK
-- gimp OK
-- gns3 NOK
-- hashcalc NOK
-- kaspersky NOK
-- livedraw NOK
-- microsip NOK
-- notion NOK
-- obsstudio OK
-- pdfarranger OK
-- pgadmin NOK
-- postman--NOK
-- powertoys NOK
-- putty NOK
-- python OK
-- quickhash OK
-- rufus OK
-- sublime OK
-- superputy OK
-- sysinternalsuite OK
-- teraterm NOK
-- torbrowser OK
-- veracrypt OK
-- virtualbox OK
-- vlcmediaplayer OK
-- vmware OK
-- winbox OK
-- winscp OK
-- winsshterm NOK
-- wireshark OK
-- zoiper OK
-- zoomit OK
-- bitwarden OK
-- ccleaner OK
-- google OK
-- firefox OK
-- mysqlworkbench NOK
-- speecy OK
-- teamviewer OK
-- adobepremiere OK
-- cinebench NOK
-- hwmonitor OK
-- msoffice OK
-- whatsapp OK
-- ultravnc OK
-- winmerge OK
-- nRemoteNG OK
-- xming(server) OK
-- libreoffice OK
-- 3CXphone OK
-- TFTPserver(SolarWinds) OK
-- TFTPD64 OK
-- inkscape OK
-- epicPen OK
-- IPangryscanner OK
-- Vistumbler OK
-- Nessus OK
-- NetScanTools OK
-- BurpSuite OK
-- Inkscape OK
-- IPv6ScopeFinder OK
-- DevCpp OK
-- UniversalForwarder OK
-- WazuhhAgent OK
-- OpenVPN OK
-- IPevoAnnotator OK
-- GitHub OK
-- Git OK
-- VSCode OK
-- FreeCAD OK
-- LibreCAD OK
-- TheDude OK
-- SecureCRT OK
-- Cygwin OK
-- Bandicut OK
-- ShutterEncoder OK
-- DaVinciResolve OK
-- DLCBoot NOK
-- WIFIAnalyzer OK
-- CoreTemp OK
-- HWinfo64 OK
-- Vysor OK
-- Zenmap OK
-- EnSP OK
-- Authy OK
-- Zoom OK
-- OpenVPNanyconnect OK
-- Ditto OK
-- Okular OK
-- PDFsam OK
-- MiniTool OK
-- Gnomeclocks OK
+- 7zip 
+- anki 
+- anydesk 
+- audacity 
+- bizagui 
+- ciscopackettracer 
+- crystaldiskinfo 
+- crystaldiskmark 
+- discord 
+- draw.io 
+- filezilla 
+- flameshot 
+- furmark 
+- gimp 
+- gns3 
+- hashcalc 
+- kaspersky 
+- livedraw 
+- microsip 
+- notion 
+- obsstudio 
+- pdfarranger 
+- pgadmin 
+- postman
+- powertoys 
+- putty 
+- python 
+- quickhash 
+- rufus 
+- sublime 
+- superputy 
+- sysinternalsuite 
+- teraterm 
+- torbrowser 
+- veracrypt 
+- virtualbox 
+- vlcmediaplayer 
+- vmware 
+- winbox 
+- winscp 
+- winsshterm 
+- wireshark 
+- zoiper 
+- zoomit 
+- bitwarden 
+- ccleaner 
+- google 
+- firefox 
+- mysqlworkbench 
+- speecy 
+- teamviewer 
+- adobepremiere 
+- cinebench 
+- hwmonitor 
+- msoffice 
+- whatsapp 
+- ultravnc 
+- winmerge 
+- nRemoteNG 
+- xming(server) 
+- libreoffice 
+- 3CXphone 
+- TFTPserver(SolarWinds) 
+- TFTPD64 
+- inkscape 
+- epicPen 
+- IPangryscanner 
+- Vistumbler 
+- Nessus 
+- NetScanTools 
+- BurpSuite 
+- Inkscape 
+- IPv6ScopeFinder 
+- DevCpp 
+- UniversalForwarder 
+- WazuhhAgent 
+- OpenVPN 
+- IPevoAnnotator 
+- GitHub 
+- Git 
+- VSCode 
+- FreeCAD 
+- LibreCAD 
+- TheDude 
+- SecureCRT 
+- Cygwin 
+- Bandicut 
+- ShutterEncoder 
+- DaVinciResolve 
+- DLCBoot 
+- WIFIAnalyzer 
+- CoreTemp 
+- HWinfo64 
+- Vysor 
+- Zenmap 
+- EnSP 
+- Authy 
+- Zoom 
+- OpenVPNanyconnect 
+- Ditto 
+- ular 
+- PDFsam 
+- MiniTool 
+- Gnomeclocks 
+- TeamViewer
 
 ---
 
@@ -112,7 +113,7 @@
 - Gromit MPX
 - Input Remapper
 - Kcal
-- Okular
+- ular
 - OBS Studio
 - PDF Arranger
 - PulseAudio
