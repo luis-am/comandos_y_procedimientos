@@ -566,6 +566,10 @@ Habilitar el scan machine learning
 		set machine-learning-detection {enable| monitor | disable}
 	end
 
+Habilitar Fortigate para recibir signature database desde FortiSandBox
+
+    set gui-fortigate-cloud-sandbox enable
+
 Verificar las versiones de firmas de antivirus
 
 	diagnose autoupdate status
@@ -577,7 +581,7 @@ Seleccionar el database de firmas de antivirus (cli only)
 		set use-extreme-db {enable | disable}
 	end
 
-Configurar politicas de firewall proxy-based y flow-based
+Configurar politicas de firewall proxy-based y flow-based, configurar opciones de protocolos
 
 	config firewall profile-protocol-options
 		edit <profile_name>
@@ -613,3 +617,7 @@ Algunos comandos utiles de antivirus
 	diagnose autoupdate versions
 	diagnose antivirus test "get scantime"
 	execute update-av
+
+Ver las Ip de las interfaces físicas
+
+    get system interface physical
