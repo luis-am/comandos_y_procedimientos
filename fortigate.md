@@ -621,3 +621,13 @@ Algunos comandos utiles de antivirus
 Ver las Ip de las interfaces físicas
 
     get system interface physical
+
+# Ver el healt-status de sd-wan
+
+    diagnose sys sdwan health-check
+
+# Fórmula para medir la calidad del enlace
+
+    Link Quality = (a*latency)+(b*jitter)+(c*packet loss)+(d/bandwidth)
+    
+# 

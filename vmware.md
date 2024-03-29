@@ -60,6 +60,10 @@
 
     CTRL + D
 
+# Abrir el gestor de Snapshot
+
+	CTRL + M
+
 # Cambiar entre tabs
 
     ALT + #

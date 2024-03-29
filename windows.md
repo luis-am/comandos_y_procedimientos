@@ -522,4 +522,10 @@ Abrir el directorio activo
 
     dsa.msc
 
+Obtener el nombre de dominio
 
+	wmic computersystem get domain
+
+Configurar si el usuario necesita iniciar sesión con contraseña o no
+
+	netplwiz

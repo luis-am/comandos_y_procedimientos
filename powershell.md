@@ -109,3 +109,66 @@ Ver información de IP
 
 	shutdown /s /t 0
 	shutdown /r /t 0
+
+// VER LA INFORMACIÓN DE USO DE ALMACENAMIENTO
+
+	get-psdrive
+
+
+##### Common Verbs GET, SET, NEW, ADD, REMOVE
+
+// VER TODOS LOS COMANDOS DISPONIBLES A TRAVÉS DE MODULOS
+
+	get-command -module [MODULE]
+
+// VER AYUDA DE LOS COMANDOS
+
+	get-help [*NOUN*]
+
+// ALIAS CONOCIDOS
+
+	cgi - get-childitem
+	mkdir - new-item
+	cd - set-location
+
+// OBTENER LA LISTA DE ARCHIVOS DE MANERA ORDENADA
+
+	ls | sort LastAccessTime
+
+// LISTAR DE MANERA RECURSIVA
+
+	dir -recurse
+
+// net use z: \\server\c$
+
+// Ver los procesos
+
+	get-process
+
+// Botar la salida de un comando a un archivo
+
+	ipconfig /all > file.txt | notepad file.txt
+	ipconfig /all >> file.txt | notepad file.txt
+
+// VER EL CONTENIDO DE UN ARCHIVO
+
+	cat [FILE]
+	get-content [FILE]
+
+// VER LA INFORMACION DE UN USUARIO EN EL DIRECTORIO ACTIVO
+
+	get-aduser -identity '[USERNAME]'
+
+// OBTENER LA LISTA DE ADAPTADORES DEL SISTEMA
+	
+	get-netadapter
+
+// VER LA DIRECCIÓN IP DE LOS ADAPTADORES
+
+	get-netipaddress
+
+// ESTABLECER NUEVA DIRECCIÓN IP
+
+	New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress "192.168.1.100" -PrefixLength 24 -DefaultGateway "192.168.1.1"
+
+
