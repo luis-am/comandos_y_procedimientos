@@ -1,0 +1,5 @@
+# Buscar páginas potencialmente escondidas.
+
+	gobuster -u http://fakebank.com -w wordlist.txt dir
+
+#  
