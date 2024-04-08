@@ -171,4 +171,10 @@ Ver información de IP
 
 	New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress "192.168.1.100" -PrefixLength 24 -DefaultGateway "192.168.1.1"
 
+// INSTALAR EL MÓDULO DE SERVICIO IIS
 
+	Install-WindowsFeature -Name Web-Server -IncludeManagementTools
+
+// Renombrar el equipo
+
+	Rename-Computer -NewName "NAMESERVER" -DomainCredential DOMAIN\ADMINISTRATOR -Restart

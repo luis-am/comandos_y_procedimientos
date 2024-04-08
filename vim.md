@@ -509,3 +509,11 @@ Copiar todo contenido incluyendo los simbolos de brackets
 
 	viB
 	vaB
+
+Cambiar los alrededores, en el ejemplo se muestra el cambio de comillas dobles a comillas simples
+
+    "Hola, esto es una prueba."
+    comando: cs"'
+    'Hola, esto es una prueba.'
+
+

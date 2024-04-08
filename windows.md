@@ -529,3 +529,7 @@ Obtener el nombre de dominio
 Configurar si el usuario necesita iniciar sesión con contraseña o no
 
 	netplwiz
+
+Búsqueda LDAP de Microsoft Windows
+
+    ldp.exe
