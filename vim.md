@@ -516,4 +516,21 @@ Cambiar los alrededores, en el ejemplo se muestra el cambio de comillas dobles a
     comando: cs"'
     'Hola, esto es una prueba.'
 
+Para bordear una palabra (ejemplo)
+    
+    Esto es una prueba.
+    comando: ponemos el cursor en la palabra Esto y ejecutamos ysiw'
+    'Esto' es una prueba.
 
+Para bordear una línea entera, poner entre paréntesis por ejemplo.
+    
+    Esto es una prueba.
+    comando: yss)
+    (Esto es una prueba.)
+    Esto es una prueba.
+
+Eliminar lo que está rodeando a la palabra o línea
+
+    "Esto es una prueba."
+    comando: ds"
+    Esto es una prueba.

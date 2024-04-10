@@ -178,3 +178,8 @@ Ver información de IP
 // Renombrar el equipo
 
 	Rename-Computer -NewName "NAMESERVER" -DomainCredential DOMAIN\ADMINISTRATOR -Restart
+
+// Seleccionar un objeto del resultado (ejemplo)
+
+    Get-ChildItem | Select-Object [ARGUMENT]
+    Get-ChildItem | Select-Object BaseName
