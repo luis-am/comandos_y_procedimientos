@@ -23,3 +23,7 @@
 # Ver el resultado seleccionando el origen [ -F ]
 
     iftop -n -N -F [SOURCE]
+
+# Ejemplo muy útil
+
+	iftop -Nnm 10M -F 172.16.16.17/32 -i Port1

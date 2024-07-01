@@ -66,11 +66,11 @@ Ir a la seccion siguiente de recibidos
 
 Conversacion arriba (nueva)
 
-	4
+	j	
 
 Conversacion abajo (antigua)
 
-	6
+	k
 
 Abrir mensaje
 
@@ -78,7 +78,7 @@ Abrir mensaje
 
 Volver a la lista de conversaciones
 
-	7
+	b
 
 ---
 
@@ -127,3 +127,7 @@ Marcar como no leido
 Marcar como importante
 
 	i
+
+Responder
+
+	R

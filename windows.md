@@ -533,3 +533,19 @@ Configurar si el usuario necesita iniciar sesión con contraseña o no
 Búsqueda LDAP de Microsoft Windows
 
     ldp.exe
+
+Abrir el panel de Windows Defender
+
+	windowsdefender:
+
+Abrir propiedades del ratón
+
+	main.cpl
+
+Ver las propiedades del sistema remoto
+
+	SystemPropertiesRemote
+
+Activar | Desactivar características de Windows
+
+	optionalfeatures
