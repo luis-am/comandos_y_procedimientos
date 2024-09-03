@@ -549,3 +549,11 @@ Ver las propiedades del sistema remoto
 Activar | Desactivar características de Windows
 
 	optionalfeatures
+
+Ver la configuración de TPM
+
+	tpm.msc
+
+Abrir el administrador de BitLocker
+
+	manage-bde.cpl

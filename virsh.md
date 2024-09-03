@@ -132,3 +132,19 @@
 	/etc/libvirt/qemu/ → máquinas virtuales
 	/etc/libvirt/qemu/networks/ → redes virtuales
 	/etc/libvirt/qemu/nwfilter/ → filtros de red
+
+-------------------------------------------------------------------
+
+## Extender un disco.
+
+# Determinar la ruta del disco de la máquina virtual
+
+	virsh domblklist [VM NAME]
+
+# Ver información del disco 
+
+	sudo qemu-img info /var/lib/libvirt/images/[DISK].qcow2
+
+# Extender el tamaño del disco de la máquina virtual (Por ejemplo 20G)	
+
+	sudo qemu-img resize /var/lib/libvirt/images/[DISK].qcow2 +20G
