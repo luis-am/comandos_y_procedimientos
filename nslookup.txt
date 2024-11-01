@@ -1,0 +1,20 @@
+### Comandos nslookup
+
+#### Búsqueda directa
+nslookup [DOMAIN NAME] [SPECIFIED DNS SERVER]
+nslookup google.com 1.1.1.1
+
+
+#### Búsqueda de registros MX
+nslookup -type=mx [DOMAIN NAME]
+nslookup -type=mx hdosdemayo.gob.pe
+
+
+#### Búsqueda inversa (Pointer Record)
+nslookup -type=ptr [MAIL SERVER PUBLIC IP ADDRESS]
+nslookup -type=ptr 191.98.137.43
+
+
+#### Búsqueda de registros TXT
+nslookup -type=txt TXT_RECORD_NAME._domainkey.DOMAIN_NAME
+nslookup -type=txt sophos028aa573f16e43f2803f38befdeee4fb._domainkey.hdosdemayo.gob.pe

@@ -177,3 +177,16 @@ Abreviación rápida
 	git add [FILENAME]
 	git commit -m "Primer commit."
 	git remote add origin https:#github.com/luis-am/lalala.git
+
+## Pasos de Freddy:
+
+PASO 1:
+	git remote add upstream REPOSITORIO PRINCIPAL
+PASO 2:
+	git remote -v
+PASO 3:
+	git fetch upstream
+PASO 4:
+	git checkout main  # Cambia a la rama principal de tu fork
+PASO 5: 
+	git merge upstream/main

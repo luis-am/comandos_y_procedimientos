@@ -29,3 +29,10 @@
 # Ver los usuarios
 
 	- select user from mysql.user;
+
+##############################################################
+
+# Cambiar la contraseña del usuario postgres
+
+	- sudo -u postgres psql postgres
+	postgres=# \password postgres
