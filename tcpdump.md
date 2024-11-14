@@ -16,6 +16,10 @@
 
 	tcpdump -r file.pcap	
 
+## Escribir la salida en un archivo
+
+	tcpdump -w file.pcap	
+
 ## No resolver IPs a nombres
 
 	tcpdump -i eth0 -n

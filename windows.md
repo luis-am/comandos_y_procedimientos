@@ -548,7 +548,7 @@ Ver las propiedades del sistema remoto
 
 Activar | Desactivar características de Windows
 
-	optionalfeatures
+	optionalfeatures:
 
 Ver la configuración de TPM
 

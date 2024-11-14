@@ -86,3 +86,8 @@
 	tcpdump 'proto UDP'
 	tcpdump interface PortB
 	tcpdump interface PortB 'port 21'
+
+## Ver el tráfico (ancho de banda)
+
+	console
+	system diagnostics utilities bandwidth-monitor

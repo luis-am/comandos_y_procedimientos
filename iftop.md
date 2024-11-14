@@ -27,3 +27,7 @@
 # Ejemplo muy útil
 
 	iftop -Nnm 10M -F 172.16.16.17/32 -i Port1
+
+# Ejemplo muy útil
+
+	iftop -nN -P -m 10M -f 'host 10.0.0.1 and port 21' -i enp42s0

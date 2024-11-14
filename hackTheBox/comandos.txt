@@ -1,0 +1,475 @@
+### Comandos
+
+- Ver la versión de Linux OS flavor
+
+    cat /etc/issue
+    
+- Ayuda
+
+    apropos
+
+- Ver el usuario logueado
+
+    whoami
+
+- Ver la información del usuario logueado
+
+    id
+
+- hostname
+- uname
+- pwd
+- ifconfig
+- ip address
+- netstat
+- ss
+- ps
+- who
+- env
+- lsblk
+- lsusb
+- lsof
+- lspci
+
+- Ver la versión del kernel
+
+    uname -r
+
+- Ver el 'mail path' del usuario actual
+
+    echo $MAIL
+
+- Ver el status de un archivo
+
+    stat [FILE]
+    stat /etc/sudoers
+
+- Ver el path de un comando
+
+    which [COMMAND]
+    which ls
+
+- Uso del comando 'find'
+    
+    find / -type f -name *.conf -user root -size +20k -newermt 2020-03-03 -exec ls -al {} \; 2>/dev/null
+    find / -iname *.conf -newermt 2020-03-03 -size -28k -size +25k -exec ls -la {} \; 2>/dev/null
+    find /etc/ -name *.conf 2>/dev/null | grep systemd
+    find /etc/ -name *.conf 2>/dev/null | grep systemd | nl
+
+- Buscar archivos por nombre rápidamente; recomendable actualizar la base de datos local, para ello ejecutamos:
+
+    sudo updatedb
+    locate *.conf
+    ex: locate *.bak | wc -l
+
+- Redirect STDOUT to a file
+
+    find /etc/ -name shadow 2>/dev/null > resultados.txt
+
+- Redirect STDOUT and STERROR to different files
+
+    find /etc/ -name shadow 2>errors.txt 1>stdout.txt
+
+- Redirect STDIN
+
+        cat < stdout.txt
+
+- Redirect STDOUT and append to a file
+
+    find /etc/ -name passwd >> stdout.txt 2>/dev/null
+
+- Mostrar el resultado con numero de lineas
+
+    ls | nl
+
+- Ver la cantidad de paquetes instalados correctamente, prefijo 'ii' indica paquetes instalados correctamente.
+
+    dpkg -l | grep ^ii
+    dpkg -l | grep ^ii | wc -l
+
+- More and less are fundamental pagers
+
+- Excluir del resultado con 'grep'
+
+    cat /etc/passwd | grep -v "false\|nologin"
+
+- Specific result
+
+    cat /etc/passwd | cut -d":" -f1
+
+- Reemplazar caracteres (translate: tr)
+
+    cat /etc/passwd | head | nl | tr ":" " "
+
+- Darle forma de tabla (column -t)
+
+    cat /etc/passwd | tr ":" " " | column -t
+
+- Muestra solo la primera columna y ultima del resultado
+
+    cat /etc/passwd | tr ":" " " | awk '{print $1 $NF}'
+
+- Mostrando otro resultado con el comando sed
+
+    cat /etc/passwd | grep -v "false\|nologin" | tr ":" " " | awk '{print $1, $NF}' | sed 's/bin/HTB/g'
+
+- Para ver las conexiones abiertas
+
+    ss -tuln4
+    t: tcp
+    u: udp
+    l: listening
+    n: no resolución de nombre
+    4: ipv4
+
+- Filtrar con grep, ejemplo de hack the box, todo lo que está dentro del corchetes está excluido.
+
+    curl "https://www.google.com | grep -Po ['\"]*" file.txt | sort -u | wc -l
+
+- Grepear usando la expresión OR(|)
+
+    grep -E "(my|false)" /etc/passwd
+
+- Grepear usando la expresión AND(.*)
+
+    grep -E "(my.*false)" /etc/passwd
+
+- Gestor de paquetes de dpkg
+
+    aptitude
+
+- Ver información de un paquete en específico
+
+    apt-cache search [PACKAGE]
+    apt-cache show [PACKAGE]
+
+- Listar los paquetes instalados
+
+    apt list --installed
+
+- Systemd es un demonio "Init Process"
+
+- Listar todos los servicios
+
+    systemctl list-units --type=service
+
+- Ver los problemas de un servicio de porqué no ha iniciado
+
+    journalctl -u [SERVICE]
+    journalctl -u ssh.service --no-pager
+
+- Ver todas las 'signals' del comando 'kill'
+
+    kill -l
+
+- Forzar la finalización de un programa
+
+    kill -9 [PID]
+
+- Suspender el proceso
+
+    CTRL + z
+
+- Recargar los archivos de configuración de los servicios sin detener o reiniciar los servicios en ejecución
+
+	sudo systemctl daemon-reload
+
+- Instalar el servicio NFS
+
+	sudo apt install nfs-kernel-server -y
+
+- Archivo de configuracion del servicio NFS
+
+	/etc/exports
+
+- Instalar python web server
+
+	python3 -m http.server
+	python3 -m http.server [PORT]
+	python3 -m http.server 8080
+
+- Uso de curl y wget
+
+	curl http://localhost:8000
+	wget http://localhost:8000
+
+- Instalar http-server con npm
+
+	npm -g install http-server
+
+- Iniciar el servidor web con npm
+
+	http-server -p 8080
+
+- Iniciar servidor web con php
+
+	php -S 127.0.0.1:8080
+
+- Herramientas para backup en Linux
+
+	Rsync
+	Deja Dup
+	Duplicity
+
+- Backup a local directory to a remote directory
+
+	rsync -av /path/to/mydirectory user@backup_server:/path/to/backup/directory
+	
+	rsync -avz --backup --backup-dir=/path/to/backup/folder --delete /path/to/mydirectory user@backup_server:/path/to/backup/directory
+
+- Restore a backup
+
+	rsync -av user@remote_host:/path/to/backup/directory /path/to/mydirectory 	
+
+- Encrypted Rsync
+
+	rsync -avz -e ssh /path/to/mydirectory user@backup_server:/path/to/backup/directory
+
+- Revisar luego los archivos tcp wrappers
+
+	/etc/hosts.allow
+	/etc/hosts.deny
+
+- Uso del comando curl
+
+	curl -O inlanefreight.com/
+	curl -o output.txt inlanefreight.com/
+
+- Silenciar el status del comando curl
+
+	curl -O -s inlanefreight.com/index.html
+
+- Partes de una URL
+
+	https://admin:password@inlanefreight.com:80/dashboard.php?login=true#status
+	
+- Skip the certificate
+
+	curl -k https://inlanefreight.com
+
+- Hacer un request con curl y mostrar todo detalles
+
+	curl -v http://inlanefreight.com
+	curl -vvv http://inlanefreight.com
+
+- Ver solo el encabezado de respuesta
+
+	curl -I inlanefreight.com
+
+- Establecer el agente en el encabezado de request
+
+	curl https://www.inlanefreight.com -A 'Mozilla/5.0'
+
+- autenticación basica http
+
+	curl -u admin:admin http://[SERVER IP]:[PORT]
+	curl http://admin:admin@[SERVER IP]:[PORT]
+	curl -H 'Authorization: Basic YWRtaW46YWRtaW4=' http://[SERVER IP]:[PORT]
+
+- Ejemplo de curl
+
+	curl -H 'Authorization: Basic YWRtaW46YWRtaW4=' -v http://83.136.250.158:58414/search.php?search=flag
+
+- Metodo POST
+
+	curl -X POST -d 'username=admin&password=admin' http://<SERVER_IP>:<PORT>/
+	curl -X POST -d 'username=admin&password=admin' http://<SERVER_IP>:<PORT>/ -i
+
+- Set request cookies, authenticated cookies
+
+	curl -X POST -b 'PHPSESSID=gntrhk0pc3d8uippc7figci791' http://<SERVER_IP>:<PORT>
+	curl -H 'Cookie: PHPSESSID=gntrhk0pc3d8uippc7figci791' http://<SERVER_IP>:<PORT>
+
+- JSON Data
+
+	curl -X POST -d '{"search":"london"}' -b 'PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1' -H 'Content-Type: application/json' http://<SERVER_IP>:<PORT>/search.php
+["London (UK)"]
+
+	curl -X POST -d '{"search":"flag"}' -b 'PHPSESSID=gntrhk0pc3d8uippc7figci791' -H 'Content-Type: application/json' http://83.136.251.254:30982/search.php; echo
+
+- Leer datos de api y pasalo a formato json (jq)
+
+	curl -s http://94.237.63.109:44411/api.php/city/london | jq
+
+- Agregar una nueva entrada a la tabla usando POST, y especificando el tipo de formato que en este caso es Jason:
+
+	curl -X POST http://94.237.63.109:44411/api.php/city -d '{"city_name":"HTB_City", "country_name":"HTB"}' -H 'Content-Type: applicaton/json'
+
+- Actualizar entrada con PUT (api)
+
+	curl -X PUT http://94.237.63.109:44411/api.php/city/london -d '{"city_name":"New_HTB_City", "country_name":"HTB"}' -H 'Content-Type: application/json'	
+
+
+- Eliminar una entrada de api con el método DELETE
+
+	curl -X DELETE http://<SERVER_IP>:<PORT>/api.php/city/New_HTB_City
+
+
+######################### WINDOWS FUNDAMENTALS #########################
+
+- Obtener informacion acerca del sistema operativo con powershell
+
+	get-wmiobject -class win32_operatingsystem | select version,buildnumber
+
+- Conectarse a una máquina windows desde linux
+
+	xfreerdp /v:<targetIp> /u:username /p:password
+
+- Ver los archivos con el comando
+
+	tree c:\ /f | more
+
+- Ver todos los archivos de un directorio incluyendo los ocultos
+
+	dir c:\ /a
+
+- Ver los permisos de un directorio en windows
+
+	icacls
+
+- Ver la lista disponibles de un equipo (shares)
+
+	smbclient -L SERVER_IP -U htb-student
+
+- Conectarse a un share de un equipo
+
+	smbclient '\\SERVER_IP\Company Data' -U htb-student
+
+- Montandose al share desde Linux
+
+	sudo mount -t cifs -o username=htb-student,password=Academy_WinFun! //ipaddoftarget/"Company Data" /home/user/Desktop/
+
+	sudo mount -t cifs -o username=luisam81,password=S0p0rt3.2023 //192.168.122.221/"company data" /home/luisam/Desktop/
+
+- Instalacion de cifs-utils para compartir y montar shares
+
+	sudo apt-get install cifs-utils
+
+- Una forma de verificar o ver los shared es a através de computer management
+
+	win + r: compmgmt.msc
+	net share
+
+- Ver los servicios y filtrarlos en Powershell
+
+	get-service | ? { $_.Status "Running"} | select -First 2 | fl
+	get-service | where-object { $_.Status "Running"} | select -First 2 | fl
+	get-service | ? { $_.Name -match '\.exe' }
+
+- Servicio importante (LSASS)
+
+- Consultar servicios desde cmd
+
+	sc qc wuauserv
+
+- Consultar servicios de otra pc en la red desde cmd
+
+	sc [IP REMOTE PC] qc [SERVICE]
+	sc x.x.x.x qc wuauserv
+
+- Uso variado del comando sc.
+
+	sc start [SERVICE]
+	sc stop [SERVICE]
+	sc config [SERVICE] [PARAMETERS]
+
+- Ver permisos de un servicio en cmd
+
+	sc sdshow wuauserv
+
+- Ver permisos de un servicio en powershell
+
+	get-acl -path HKLM:\System\CurrentControlSet\Services\wuauserv | fl
+
+- Buscar ayuda de un comando
+
+	help [COMMAND]
+	help schtasks
+
+- Uso de cmdlets (Sintaxis es: Verb-Noun)
+
+	Get-ChildItem -Recurse
+	Get-ChildItem -Path [PATH] -Recurse
+
+- Ver todos los alias disponibles en powershell
+
+	Get-Alias
+	Get-Alias | ? { $_.Definition -match "ipconfig" } | fl
+
+- Obtener ayuda de un cmd-let en powershell
+
+	Get-Help [CMDLET NAME] -Online
+
+- Ver las politicas de ejecucion
+
+	Get-ExecutionPolicy -List
+
+- Setear la política de ejecución a bypass solo en la sesión activa
+
+	Set-ExecutionPolicy	Bypass -Scope Process
+
+- Mostrar el nombre de la pc mediante wmi
+
+	wmic computersystem get name
+
+- Ver informacion del sistema operativo
+
+	wmic os list brief
+
+- Ver informacion del sistema opearativo usando el modulo de get-wmiobject
+
+	Get-WmiObject -Class Win32_OperatingSystem | select SystemDirectory,BuildNumber,SerialNumber,Version | ft
+
+- Instalar WSL
+
+	Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+
+- Haciendo consulta de keys
+
+	reg query HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+	reg query HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+
+- Ver los ajustes de protección
+
+	Get-MpComputerStatus | findstr "True"
+
+- Ver el SID de un usuario local
+
+	wmic useraccount where "name='USER'" get name,sid
+	wmic useraccount where "name='luisam'" get name,sid
+
+- Ver SID de un grupo local
+
+	wmic group where "name='GROUP'" get sid
+	wmic group where "name='Administradores'" get sid
+
+
+######################### INTRODUCTION TO ACTIVE DIRECTORY  #########################
+
+- Foreign Security Principals son guardados en este contenedor
+
+	cn=ForeignSecurityPrincipals,dc=inlanefreight,dc=local
+
+- Kerberos protocol uses port 88
+
+- Domain Cached Credentials (MSCache2)
+	
+	HKEY_LOCAL_MACHINE\SECURITY\Cache
+
+- Ver los atributos más comunes de usuarios
+
+	Get-ADUser -Identity [USER]
+	Get-ADUser -Identity luisam
+
+- Ver el scope de los grupos de Active Directory
+
+	Get-ADGroup  -Filter * |select samaccountname,groupscope
+
+- Ver los detalles de un grupo en particular
+
+	Get-ADGroup -Identity [GROUP] -Properties *
+	Get-ADGroup -Identity "Server Operators" -Properties *
+
+- Ver los privilegios de un usuario
+
+	whoami /priv
