@@ -205,3 +205,39 @@ Fixing an identical sid while joining an active directory domain
 
 	C:\Windows\System32\Sysprep\sysprep.exe
 	check global
+
+- Eliminar un usuario
+
+	Remove-ADUser -Identity USERNAME
+
+- Desbloquear una cuenta
+
+	Unlock-ADAccount -Identity USERNAME
+
+- Reset user password
+
+	Set-ADAccountPassword -Identity USERNAME -Reset -NewPassword (ConvertTo-SecureString -AsPlainText "NewP@ssw0rdReset!" -Force)
+
+- Force password change
+
+	Set-ADUser -Identity amasters -ChangePasswordAtLogon $true
+
+- Crear una nueva unidad organizativa
+
+	New-ADOrganizationalUnit -Name "Security Analysts" -Path "OU=IT,OU=HQ-NYC,OU=Employees,OU=CORP,DC=INLANEFREIGHT,DC=LOCAL"
+
+- Crear una nueva GPO aplicado a una unidad organizativa
+
+	New-ADGroup -Name "Security Analysts" -SamAccountName analysts -GroupCategory Security -GroupScope Global -DisplayName "Security Analysts" -Path "OU=Security Analysts,OU=IT,OU=HQ-NYC,OU=Employees,OU=Corp,DC=INLANEFREIGHT,DC=LOCAL" -Description "Members of this group are Security Analysts under the IT OU"
+
+- Agregar un usuario a un grupo
+
+	Add-ADGroupMember -Identity analysts -Members ACepheus,OStarchaser,ACallisto
+
+- Duplicar una gpo
+
+	Copy-GPO -SourceName "Logon Banner" -TargetName "Security Analysts Control"
+
+- Aplicar una gpo a una UO
+
+	New-GPLink -Name "Security Analysts Control" -Target "ou=Security Analysts,ou=IT,OU=HQ-NYC,OU=Employees,OU=Corp,dc=INLANEFREIGHT,dc=LOCAL" -LinkEnabled Yes
