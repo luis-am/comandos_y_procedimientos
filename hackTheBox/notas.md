@@ -17,3 +17,5 @@
 - Lateral Movement
 - Proof-of-Concept
 - Post-Engagement
+
+- Puerto '0' es considerado como 'wildcard port'.

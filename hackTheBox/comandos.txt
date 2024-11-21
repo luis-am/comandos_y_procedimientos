@@ -473,3 +473,12 @@
 - Ver los privilegios de un usuario
 
 	whoami /priv
+
+### Learning Path for Penetration Tester
+
+- Sacar el banner de un equipo mediante netcat
+
+	nc x.x.x.x 22
+	nc 192.168.122.122 22
+
+- Es común que los websites contengan un file llamado 'robots.txt'. Este contiene información acerca de la ubicación de archivos privados y paginas de admin.

@@ -238,9 +238,13 @@ Para seguir buscando la misma palabra [backward]
 
 	N
 
-Para ir a donde empezamos
+Ir a la última posición del cursor
 
 	ctrl + o
+
+Volver a la posición anterior
+
+	ctrl + i
 
 Sustituir una palabra en la misma linea
 
