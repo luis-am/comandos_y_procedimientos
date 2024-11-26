@@ -1,9 +1,0 @@
-Contraseña par ingresar a bandit9:
-	sshpass -p wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw ssh bandit13@bandit.labs.overthewire.org -p 2220
-
-
-sshpass -p VwOSWtCA7lRKkTfbr2IDh6awj9RNZM5e ssh bandit17@bandit.labs.overthewire.org -p 2220
-
-sshpass -p awhqfNnAbc1naukrpqDYcF95h7HoMTrC ssh bandit19@bandit.labs.overthewire.org -p 2220
-
-sshpass -p VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar ssh bandit24@bandit.labs.overthewire.org -p 2220

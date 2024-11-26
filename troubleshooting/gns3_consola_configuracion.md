@@ -1,1 +1,0 @@
-C:\Program Files\SuperPutty\SuperPutty.exe -telnet "%h -P %p -wt \"%d\""
