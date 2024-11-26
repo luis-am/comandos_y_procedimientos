@@ -1,0 +1,12 @@
+// Error: Virtualized Intel VT-x/EPT is not supported on this platform. Continue without virtualized Intel VT-x/EPT
+
+Disable "hypervisorlaunchtype":
+	Click: "Start"
+	Type (without quotes): "powershell"
+	Select: "Run as administrator"
+	Type (without quotes): "bcdedit /set hypervisorlaunchtype off"
+	Press: [ENTER]
+	Close: Powershell window
+
+// Si sale el error de adaptador
+	sc config npf start= auto
