@@ -105,3 +105,8 @@
 # comando usando ssh-pass
 
 	for user in ansible root; do   for os in ubuntu centos;   do     for instance in 1 2 3;     do       sshpass -f password.txt ssh-copy-id -o StrictHostKeyChecking=no ${user}@${os}${instance};     done;   done; done
+
+# Iniciar sesión con la clave privada
+
+	ssh [USER]@[IP] -i [PRIVATE KEY FILE]
+	ssh user1@192.168.122.1 -i id_rsa

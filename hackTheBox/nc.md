@@ -7,3 +7,10 @@
 
     -n: no resuelve nombres
     -v: verbose
+
+- Netcat Listener
+
+    nc -lvnp [PORT]
+    nc -lvnp 1234
+
+
